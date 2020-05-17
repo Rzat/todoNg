@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="alert alert-success" *ngIf='message'>{{message}}</div>
+  <h1>Adding Master Shop!</h1>
+  <form class="example-form" (ngSubmit)="saveShopEntry()">
+    <br>
+    <div class="split left">
+      <fieldset class="form-group">
+        <label>Shop Name</label>
+        <input type="text" #brandName="ngModel" [(ngModel)]="shop.shopName" class="form-control" name="shopName"
+          required="required">
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label>Address</label>
+        <input type="text" #changedName="ngModel" [(ngModel)]="shop.address" class="form-control" name="address"
+          required="required">
+      </fieldset>
+
+      <!-- <fieldset class="form-group">
+    <label>Brand Type</label>
+    <input type="text" [(ngModel)]="shop.brandType" class="form-control" name="brandType" required="required">
+</fieldset> -->
+
+      <fieldset class="form-group">
+        <label>Rate List</label>
+        <input type="text" #brandCompanyName="ngModel" [(ngModel)]="shop.parchaType" class="form-control"
+          name="parchaType" required="required">
+      </fieldset>
+
+      <!-- <fieldset class="form-group">
+      <label>City Name</label>
+      <input type="text" #brandCategoryName="ngModel" [(ngModel)]="shop.city" class="form-control" name="city"
+        required="required">
+    </fieldset> -->
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="City" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl2">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let state of filteredStates2 | async" [value]="state.city">
+            <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
+            <!-- <span >{{state.brandName}}</span> -->
+            <span [textContent]="state.city"></span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <fieldset class="form-group">
+        <label>District Name </label>
+        <input type="text" #brandCategoryName="ngModel" [(ngModel)]="shop.district" class="form-control" name="district"
+          required="required">
+        <!-- <select name="select" #brandType="ngModel" [(ngModel)]="shop.district" (change)="onChangeBrand($event)"> -->
+        <!-- <option disabled>Select Brand Type</option>
+            <option value='ENGLISH'>ENGLISH</option>
+            <option value='DESI'>HINDI</option> -->
+        <!-- <option *ngFor="let brand of  brandList" [value]="shop.brandType"> {{brand}}</option> -->
+        <!-- </select> -->
+      </fieldset>
+
+
+    </div>
+
+    <div class="split right">
+      <fieldset class="form-group">
+        <label>Group Name</label>
+        <input id="id" #packing1="ngModel" type="text" [(ngModel)]="shop.group" class="form-control" name="group"
+          required="required">
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label>Shop No.</label>
+        <input id="id2" #packing2="ngModel" type="text" [(ngModel)]="shop.shopNumber" class="form-control"
+          name="shopNumber" required="required">
+      </fieldset>
+
+
+      <!-- <fieldset class="form-group">
+        <label>From</label>
+        <input id="id3" #packing3="ngModel" type="date" [(ngModel)]="shop.fromDate" class="form-control"
+            name="fromDate" required="required">
+    </fieldset>
+
+    <fieldset class="form-group">
+        <label>To</label>
+        <input id="id3" #packing3="ngModel" type="date" [(ngModel)]="shop.toDate" class="form-control"
+            name="toDate" required="required">
+    </fieldset> -->
+      <!-- <button type="submit" class="btn btn-success">Save</button> -->
+
+    </div>
+    <div class="btnBottom">
+      <button type="submit" onClick="window.location.href=window.location.href" class="btn btn-success">Save</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- <form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{option.brandName}}
+
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form> -->

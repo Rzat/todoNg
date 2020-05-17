@@ -1,0 +1,51 @@
+<!-- <mat-list>
+    <mat-list-item *ngFor="let message of masterClass">
+        <mat-list-item>
+            <input type="text" [(ngModel)]="message.brandName" name="brandName" class="form-control">
+        </mat-list-item>
+        <mat-list-item>
+            <input type="text" [(ngModel)]="message.brandCategoryName" name="brandCategoryName" class="form-control">
+        </mat-list-item>
+        <mat-list-item>
+            <input type="text" [(ngModel)]="message.packing1" name="packing1" class="form-control">
+        </mat-list-item>
+    </mat-list-item>
+</mat-list> -->
+<form ngNoForm (ngSubmit)="saveDailyPurchase()">
+
+    <table mat-table [dataSource]="masterClass" class="mat-elevation-z8">
+        {{masterClass.brandName}}
+        <ng-container matColumnDef="brandName">
+
+            <th mat-header-cell *matHeaderCellDef> Brand Name </th>
+            <!-- <td mat-cell *matCellDef="let masterClass">
+                {{masterClass.brandName}}</td> -->
+            <td mat-cell *matCellDef="let masterClass">
+                <input type="text" [(ngModel)]="masterClass.brandName" name="brandName" class="form-control">
+            </td>
+            <td mat-footer-cell *matFooterCellDef> Total </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="packing1">
+            <th mat-header-cell *matHeaderCellDef> Packing1 </th>
+            <td mat-cell *matCellDef="let masterClass">
+                <input type="text" [(ngModel)]="masterClass.packing1" name="packing1" class="form-control">
+                <!-- {{masterClass.packing1 | currency}} </td> -->
+            <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns2"></tr>
+
+
+
+    </table>
+
+
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+<!-- (click)="saveForm(masterClass)" -->

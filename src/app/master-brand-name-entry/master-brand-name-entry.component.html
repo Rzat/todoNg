@@ -1,0 +1,63 @@
+<div class="container">
+    <form (ngSubmit)="saveMasterBrand()">
+        <fieldset class="form-group">
+            <label>Brand Name</label>
+            <input type="text" #brandName="ngModel" [(ngModel)]="entry.brandName" class="form-control" name="brandName" required="required">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Changed Name</label>
+            <input type="text" #changedName="ngModel" [(ngModel)]="entry.changedName" class="form-control" name="changedName"
+                required="required">
+        </fieldset>
+
+        <!-- <fieldset class="form-group">
+            <label>Brand Type</label>
+            <input type="text" [(ngModel)]="entry.brandType" class="form-control" name="brandType" required="required">
+        </fieldset> -->
+
+        <fieldset class="form-group">
+            <label>Brand Company Name</label>
+            <input type="text" #brandCompanyName="ngModel" [(ngModel)]="entry.brandCompanyName" class="form-control" name="brandCompanyName"
+                required="required">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Brand Category Name</label>
+            <input type="text" #brandCategoryName="ngModel" [(ngModel)]="entry.brandCategoryName" class="form-control" name="brandCategoryName"
+                required="required">
+        </fieldset>
+        
+        <fieldset class="form-group">
+            <label>Brand Type : </label>
+            <select name="select" #brandType="ngModel" [(ngModel)]="entry.brandType" (change)="onChangeBrand($event)">
+                <option disabled>Select Brand Type</option>
+                <option value='ENGLISH'>ENGLISH</option>
+                <option value='DESI'>HINDI</option>
+                <!-- <option *ngFor="let brand of  brandList" [value]="entry.brandType"> {{brand}}</option> -->
+            </select>
+
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Packing 1</label>
+            <input id="id" #packing1="ngModel" type="text" [(ngModel)]="entry.packing1" class="form-control" name="packing1"
+                required="required">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Packing 2</label>
+            <input id="id2" #packing2="ngModel"  type="text" [(ngModel)]="entry.packing2" class="form-control" name="packing2"
+                required="required">
+        </fieldset>
+
+
+        <fieldset class="form-group">
+            <label>Packing 3</label>
+            <input id="id3" #packing3="ngModel"  type="text" [(ngModel)]="entry.packing3" class="form-control" name="packing3"
+                required="required">
+        </fieldset>
+
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>

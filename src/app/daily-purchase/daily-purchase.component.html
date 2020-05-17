@@ -1,0 +1,95 @@
+<div class="container">
+    <h2>Adding Purchase Stock</h2>
+    <!-- <form #f="ngForm" (ngSubmit)="saveDailyPurchase(f)" novalidate> -->
+    <!-- <div class="split left"> -->
+    <fieldset class="form-group">
+        <label>Purchase Code</label>
+        <input type="text" [(ngModel)]="shopEntry.purchaseCode" class="form-control" name="purchaseCode"
+            required="required">
+    </fieldset>
+
+
+    <!-- </div> -->
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Purchase From</mat-label>
+        <mat-select [(ngModel)]="shopEntry.purchaseFrom" name="state">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let state of shops" value="{{state.shopName}}">
+                {{state.shopName}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Purchase To</mat-label>
+        <mat-select [(ngModel)]="shopEntry.purchaseTo" name="state2">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let state2 of shops2" value="{{state2.shopName}}">{{state2.shopName}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+
+    <!-- <div class="split right"> -->
+    <fieldset class="form-group">
+        <label>Date</label>
+        <input type="date" [ngModel]="shopEntry.date | date:'yyyy-MM-dd' " class="form-control" name="date"
+            required="required">
+    </fieldset>
+
+
+    <fieldset class="form-group">
+        <label>Bottle/Case</label>
+        <select name="select" class="form-control" [(ngModel)]="shopEntry.size">
+            <option disabled>Select Brand Type</option>
+            <option value='BOTTLE'>Bottle</option>
+            <option value='CASE'>Case</option>
+            <!-- <option *ngFor="let brand of  brandList" [value]="entry.brandType"> {{brand}}</option> -->
+        </select>
+
+    </fieldset>
+    <!-- </div> -->
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Particulars</th>
+
+                <th> Quarts </th>
+
+                <th> Pints </th>
+
+                <th> Nips </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let master of   items ">
+                <td>
+                    <input type="hidden" [(ngModel)]="master.brandName" name="brandName" class="form-control">
+                    {{master.brandName}}
+                </td>
+                <td><input type="text" [(ngModel)]="master.quarts" class="form-control" name="quarts"
+                        required="required"></td>
+                <td> <input type="text" [(ngModel)]="master.pints" class="form-control" name="pints"
+                        required="required"> </td>
+                <td> <input type="text" [(ngModel)]="master.nips" class="form-control" name="nips" required="required">
+                </td>
+                <td>
+                    <button type="submit" #photoInput (click)="saveDailyPurchase(master)"
+                        class="btn btn-success">Save</button>
+                </td>
+            </tr>
+
+            <!-- (ngModelChange)="onChangeToPints($event)"F -->
+        </tbody>
+        <div class="absolute">
+            <button type="button" class="btn btn-success" (click)="addToCart(shopEntry)">Save</button>
+        </div>
+    </table>
+
+    <!-- </form> -->
+
+</div>
+
+<!-- <p>Form value: {{ f.value | json }}</p> -->

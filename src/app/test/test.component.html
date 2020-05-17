@@ -1,0 +1,12 @@
+
+<div [formGroup]="listForm">
+	<input name="listName" formControlName="name" placeholder="list name" />
+	<div formArrayName="items">
+		<div *ngFor="let item of items.controls; index as idx" [formGroup Name]="idx">
+			<input formControlName="label" name="label" placeholder="Item name" type="text" />
+			<input formControlName="quantity" name="quantity" type="number" />
+		</div>
+	</div>
+</div>
+
+<button (click)="saveList()">Save List</button>

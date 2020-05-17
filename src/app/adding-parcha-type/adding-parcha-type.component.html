@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="alert alert-success" *ngIf='message'>{{message}}</div>
+    <h1>Adding Parcha Type!</h1>
+    <form>
+        <fieldset>
+            <h6>Type Name
+                <input type="text" name="shopName" [(ngModel)]="shopName">
+            </h6>
+        </fieldset>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Brand Name</th>
+
+                    <th> No. </th>
+
+                    <th> QUARTS </th>
+
+                    <th> PINTS </th>
+
+                    <th> NIPS </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let parcha of addParcha">
+                    <td>{{parcha.brandName}}</td>
+
+                    <td>
+                        <input type="number" #numbr="ngModel" [(ngModel)]="parcha.numbr" class="form-control"
+                            name="numbr" required="required">{{parcha.numbr}}
+                    </td>
+                    <td>
+                        <input type="number" #quarts="ngModel" [(ngModel)]="parcha.quarts" class="form-control"
+                            name="quarts" required="required">
+                    </td>
+
+                    <td>
+
+                        <input type="number" #pints="ngModel" [(ngModel)]="parcha.pints" class="form-control"
+                            name="pints" required="required">
+
+                    </td>
+
+                    <td>
+                        <input type="number" #nips="ngModel" [(ngModel)]="parcha.nips" class="form-control" name="nips"
+                            required="required">
+                    </td>
+                    <td>
+                        <button type="submit" (click)="saveParchaType(parcha.id,parcha)" class="btn btn-success"> Save
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+
+
+
+
+<!-- <div class="container">
+    <h3>Angular 9 FormArray Example</h3>
+    <form (ngSubmit)="onFormSubmit()">
+        <table>
+            <thead>
+                <tr>
+                    <th> QUARTS </th>
+                </tr>
+            </thead>
+        </table>
+        <tbody>
+            <tr>
+                <div [formGroup]="profileForm">
+
+                    <div *ngFor="let exp of profileForm.controls; let n=index">
+
+                        <input formControlName="quarts" placeholder="Enter a Name" class="form-control">
+
+
+
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </tr>
+        </tbody>
+    </form>
+</div> -->

@@ -1,0 +1,39 @@
+<h1> Master Brand List</h1>
+
+<div class="container">
+    <div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<BR>
+    <div class="row">
+        <td> <button (click)="addMasterBrand()" class="btn btn-success"> Add Master Brand </button></td>
+    </div>
+<BR>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Brand Name</th>
+
+                <th> Brand Company Name </th>
+
+                <th> Brand Category Name </th>
+
+                <th> Brand Type </th>
+
+                <th> Update </th>
+
+                <th> Delete </th>
+
+            </tr>
+        </thead>
+        <tbody>  
+            <tr *ngFor="let master of masterClass">
+                <td>{{master.brandName}}</td>
+                <td> {{master.brandCompanyName}} </td>                
+                <td> {{master.brandCategoryName}} </td>
+                <td> {{master.brandType}} </td>
+                <td> <button (click)="updateTodo(master.id)" class="btn btn-success"> Update </button></td>
+                <td> <button (click)="deleteTodo(master.id)" class="btn btn-warning"> Delete </button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
