@@ -16,8 +16,10 @@ import { MasterShopEntryComponent } from './master-shop-entry/master-shop-entry.
 import { DailyPurchaseComponent } from './daily-purchase/daily-purchase.component';
 import { FormGroupExampleComponent } from './form-group-example/form-group-example.component';
 import { TestComponent } from './test/test.component';
+import { IssueStockComponent } from './issue-stock/issue-stock.component';
+import { DailySaleComponent } from './daily-sale/daily-sale.component';
 
-
+IssueStockComponent
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -33,6 +35,8 @@ const routes: Routes = [
   { path: 'addingParcha', component: AddingParchaTypeComponent, canActivate: [RouteGuardService] },
   { path: 'addingShop', component: MasterShopEntryComponent, canActivate: [RouteGuardService] },
   { path: 'daiyPurchase', component: DailyPurchaseComponent, canActivate: [RouteGuardService] },
+  { path: 'issueStock', component: IssueStockComponent, canActivate: [RouteGuardService] },
+  { path: 'dailySale', component: DailySaleComponent, canActivate: [RouteGuardService] },
   { path: 'formGroup', component: FormGroupExampleComponent, canActivate: [RouteGuardService] },
   { path: 'test', component: TestComponent, canActivate: [RouteGuardService] },
 

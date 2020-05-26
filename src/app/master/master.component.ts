@@ -17,6 +17,8 @@ export class MasterBrandEntry {
   }
 }
 
+
+
 export class MasterShopEntry {
   constructor(
     public id: number,
@@ -41,6 +43,22 @@ export class DailyPurchase {
     public purchaseCode: string,
     public purchaseFrom: string,
     public purchaseTo: string,
+    public date: Date,
+    public size: string,
+    public brandName: String,
+    public quarts: number,
+    public pints: number,
+    public nips: number
+  ) {
+  }
+}
+
+export class IssueStock {
+  constructor(
+    public id: number,
+    public purchaseCode: string,
+    public issueFrom: string,
+    public issueTo: string,
     public date: Date,
     public size: string,
     public brandName: String,

@@ -5,12 +5,12 @@ import { API_URL } from 'src/app/app.constants';
 @Injectable({
   providedIn: 'root'
 })
-export class DailyPurchaseService {
+export class DailySaleService {
 
   constructor(private httpClient: HttpClient) { }
 
-  saveDailyPurchase(username, dailyPurchase) {
-    return this.httpClient.post(`${API_URL}/users/${username}/saveDailyPurchase`,
-      dailyPurchase);
+  findAllByShopName(username, shopName) {
+
+    return this.httpClient.get<[]>(`${API_URL}/users/${username}/findDailySaleByShopName/${shopName}`);
   }
 }

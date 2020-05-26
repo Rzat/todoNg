@@ -22,10 +22,12 @@ import { AddingParchaTypeComponent } from './adding-parcha-type/adding-parcha-ty
 import { MasterShopEntryComponent } from './master-shop-entry/master-shop-entry.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule, MatInputModule, MatSelectModule, MatListModule, MatTableModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSelectModule, MatListModule, MatTableModule, MatGridListModule } from '@angular/material';
 import { DailyPurchaseComponent } from './daily-purchase/daily-purchase.component';
 import { FormGroupExampleComponent } from './form-group-example/form-group-example.component';
 import { TestComponent } from './test/test.component';
+import { IssueStockComponent } from './issue-stock/issue-stock.component';
+import { DailySaleComponent } from './daily-sale/daily-sale.component';
 
 
 
@@ -49,7 +51,9 @@ import { TestComponent } from './test/test.component';
     MasterShopEntryComponent,
     DailyPurchaseComponent,
     FormGroupExampleComponent,
-    TestComponent
+    TestComponent,
+    IssueStockComponent,
+    DailySaleComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ import { TestComponent } from './test/test.component';
     MatInputModule,
     MatSelectModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatGridListModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true }

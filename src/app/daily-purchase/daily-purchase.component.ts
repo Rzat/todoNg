@@ -9,6 +9,7 @@ import { startWith, map } from 'rxjs/operators';
 import { DailyPurchaseService } from '../service/data/daily-purchase.service';
 
 
+
 @Component({
   selector: 'app-daily-purchase',
   templateUrl: './daily-purchase.component.html',
@@ -21,7 +22,6 @@ export class DailyPurchaseComponent implements OnInit {
   myControl = new FormControl();
   items = [];
   test = [];
-  // options = this.shopNames;
   shops = [];
   shops2 = [];
   selectedValue: 'hi';
@@ -31,12 +31,9 @@ export class DailyPurchaseComponent implements OnInit {
     brandName: '',
     quarts: 0,
     pints: 0,
-    nips: 0,
-    purchaseFrom: '',
-    purchaseTo: '',
-    date: new Date(),
-    size: ''
-  }
+    nips: 0
+  };
+  newArr = []
 
 
 
@@ -65,19 +62,14 @@ export class DailyPurchaseComponent implements OnInit {
         this.masterClass = response;
         this.abc = this.masterClass.map(({ brandName }) => brandName);
         for (let i = 0; i < response.length; i++) {
-          //console.log(this.masterClass.map(({ brandName }) => brandName));
           this.lg = {
             brandName: this.abc[i],
             quarts: 0,
             pints: 0,
             nips: 0,
-            purchaseFrom: '',
-            purchaseTo: '',
-            date: new Date(),
-            size: ''
           };
           this.items.push(this.lg)
-          console.log(this.items);
+          console.log('Ites console' + this.items);
         }
       }
     )
@@ -91,37 +83,24 @@ export class DailyPurchaseComponent implements OnInit {
         this.shopNames = response;
         this.shops = response;
         this.shops2 = response;
+
+        //To remove duplicates
+        this.shops.forEach((item, index) => {
+          if (this.newArr.findIndex(i => i.shopName == item.shopName) === -1) {
+            this.newArr.push(item)
+          }
+        });
+        this.shops = this.newArr;
+        this.shops2 = this.newArr;
+
       }
     )
   }
 
-  onChange(deviceValue) {
-    this.shopEntry.purchaseFrom = deviceValue.shopName;
-  }
 
-  onChangeTo(deviceValue) {
-    this.shopEntry.purchaseTo = deviceValue.shopName;
-  }
-
-  onChangeToPints(value) {
-    console.log('pints value' + value)
-    this.shopEntry.pints = value;
-
-  }
-
-  // saveDailyPurchase(shopEntry: NgForm) {
+  //Not using this method anymore
   saveDailyPurchase(master) {
-    console.log('saving Brand ...' + this.shopEntry.brandName);
-    console.log('saving Brand ...' + master.brandName);
-    // console.log('saving nips ...' + shopEntry.value.nips);
-    console.log('clicked by table save button...');
-
     this.shopEntry.brandName = master.brandName;
-    console.log('saving brandName purchaseFrom ...' + this.shopEntry.purchaseFrom);
-    console.log('saving brandName purchaseTo ...' + this.shopEntry.purchaseTo);
-
-
-
     this.dailyPurchaseService.saveDailyPurchase('rajat', this.shopEntry).subscribe(
       response => {
         console.log(response);
@@ -131,23 +110,33 @@ export class DailyPurchaseComponent implements OnInit {
   }
 
   addToCart(product) {
-    console.log('......' + product.purchaseFrom);
-    console.log('checking' + this.lg.purchaseFrom);
-    //.purchaseFrom = product.purchaseFrom;
-    this.items.forEach(function (value) {
+    var data = {
+      "purchaseFrom": product.purchaseFrom,
+      "purchaseTo": product.purchaseTo,
+      "date": product.date,
+      "size": product.size,
+      "orders": this.items
+    }
+    console.log('final json' + JSON.stringify(data))
+    this.dailyPurchaseService.saveDailyPurchase('rajat', data).subscribe(
+      response => {
+        console.log(response);
+      }
+    )
+  }
 
-      value.purchaseFrom = product.purchaseFrom;
-      value.purchaseTo = product.purchaseTo;
-      value.size = product.size;
-      value.date = product.date;
-      console.log('value purchase from' + value.purchaseFrom)
-      console.log('value purchase from' + value.purchaseTo)
-      console.log('value purchase from' + value.purchaseFrom)
-      console.log('value purchase from' + value.size)
-      console.log('value purchase from' + value.date)
-      console.log(value);
-    });
 
+  getTotalQuarts() {
+    return this.items.map(t => t.quarts).reduce((acc, value) => acc + value, 0);
+  }
+
+  getTotalPints() {
+    return this.items.map(t => t.pints).reduce((acc, value) => acc + value, 0);
+
+  }
+
+  getTotalNips() {
+    return this.items.map(t => t.nips).reduce((acc, value) => acc + value, 0);
   }
 
 

@@ -1,12 +1,126 @@
+<mat-grid-list cols="4" rowHeight="4:4">
 
-<div [formGroup]="listForm">
-	<input name="listName" formControlName="name" placeholder="list name" />
-	<div formArrayName="items">
-		<div *ngFor="let item of items.controls; index as idx" [formGroup Name]="idx">
-			<input formControlName="label" name="label" placeholder="Item name" type="text" />
-			<input formControlName="quantity" name="quantity" type="number" />
-		</div>
-	</div>
-</div>
+	<mat-grid-tile>
+		<fieldset class="form-group">
+			<label>Opening</label>
+			<!-- <input type="text" required="required" class="form-control"> -->
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Quarts </th>
 
-<button (click)="saveList()">Save List</button>
+						<th> Pints </th><br>
+
+						<th> Nips </th><br>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>abc</td>
+						<td>abcd</td> <br>
+						<td>abce</td><br>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</mat-grid-tile>
+	<mat-grid-tile>
+		<fieldset class="form-group">
+			<label>Issue</label>
+			<!-- <input type="text" required="required" class="form-control"> -->
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Quarts </th>
+
+						<th> Pints </th><br>
+
+						<th> Nips </th><br>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>abc</td>
+						<td>abcd</td> <br>
+						<td>abce</td><br>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</mat-grid-tile>
+	<mat-grid-tile>
+		<fieldset class="form-group">
+			<label>Sale</label>
+			<!-- <input type="text" required="required" class="form-control"> -->
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Quarts </th>
+
+						<th> Pints </th><br>
+
+						<th> Nips </th><br>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>abc</td>
+						<td>abcd</td> <br>
+						<td>abce</td><br>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</mat-grid-tile>
+
+	<mat-grid-tile>
+		<fieldset class="form-group">
+			<label>Receipt</label>
+			<!-- <input type="text" required="required" class="form-control"> -->
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Quarts </th>
+
+						<th> Pints </th><br>
+
+						<th> Nips </th><br>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>abc</td>
+						<td>abcd</td> <br>
+						<td>abce</td><br>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</mat-grid-tile>
+
+	<mat-grid-tile>
+		<fieldset class="form-group">
+			<label>Total Sale</label>
+			<!-- <input type="text" required="required" class="form-control"> -->
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Quarts </th>
+
+						<th> Pints </th><br>
+
+						<th> Nips </th><br>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>abc</td>
+						<td>abcd</td> <br>
+						<td>abce</td><br>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</mat-grid-tile>
+
+</mat-grid-list>
