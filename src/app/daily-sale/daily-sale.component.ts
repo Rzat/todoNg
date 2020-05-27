@@ -12,6 +12,8 @@ export class DailySaleComponent implements OnInit {
   newArr = [];
   items = [];
   netAmount: string;
+  div1: boolean = false;
+
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
 
@@ -38,10 +40,16 @@ export class DailySaleComponent implements OnInit {
 
   onSelectShop(e) {
     console.log('inside on selct shop' + e.value);
+    this.div1 = true;
     this.dailySaleService.findAllByShopName('rajat', e.value).subscribe(
       response => {
         console.log(response)
         this.items = response;
+
+        //check for empty array
+        if (response.length === 0) {
+          this.div1 = false;
+        }
       }
     )
   }
@@ -53,17 +61,38 @@ export class DailySaleComponent implements OnInit {
   getTotalOpeningQuarts() {
     return this.items.map(t => t.openingQuarts).reduce((acc, value) => acc + value, 0);
   }
-
   getTotalOpeningPints() {
     return this.items.map(t => t.openingPints).reduce((acc, value) => acc + value, 0);
   }
-
   getTotalOpeningNips() {
     return this.items.map(t => t.openingNips).reduce((acc, value) => acc + value, 0);
   }
 
+  getTotalTransferQuarts() {
+    return this.items.map(t => t.openingQuarts).reduce((acc, value) => acc + value, 0);
+  }
+  getTotalTransferPints() {
+    return this.items.map(t => t.openingPints).reduce((acc, value) => acc + value, 0);
+  }
+  getTotalTransferNips() {
+    return this.items.map(t => t.openingNips).reduce((acc, value) => acc + value, 0);
+  }
+
+  getReceiptQuarts() {
+    return this.items.map(t => t.receiptQuarts).reduce((acc, value) => acc + value, 0);
+  }
+  getReceiptPints() {
+    return this.items.map(t => t.receiptPints).reduce((acc, value) => acc + value, 0);
+  }
+  getReceiptNips() {
+    return this.items.map(t => t.receiptNips).reduce((acc, value) => acc + value, 0);
+  }
+
+
+
+
   getNetAmount(amountQuarts, amountPints, amountNips) {
-    console.log(amountQuarts + 'aaa' + amountPints + 'aaaa' + amountNips)
+    // console.log(amountQuarts + 'aaa' + amountPints + 'aaaa' + amountNips)
     var sum = amountQuarts + amountPints + amountNips;
     return sum;
   }

@@ -14,7 +14,7 @@
         <input type="date" name="date" required="required">
     </fieldset>
 
-    <table>
+    <table *ngIf="div1">
         <col>
         <colgroup span="3"></colgroup>
         <colgroup span="3"></colgroup>
@@ -80,13 +80,13 @@
             </td>
             <!-- Transfer -->
             <td>
-                {{master.quarts}}
+                {{master.transferQuarts}}
             </td>
             <td>
-                {{master.pints}}
+                {{master.transferPints}}
             </td>
             <td>
-                {{master.nips}}
+                {{master.transferNips}}
             </td>
             <!-- Recipt -->
             <td>
@@ -120,13 +120,13 @@
             </td>
             <!-- Rate -->
             <td>
-                {{master.receiptQuarts}}
+                {{master.rateQuarts}}
             </td>
             <td>
-                {{master.receiptPints}}
+                {{master.ratePints}}
             </td>
             <td>
-                {{master.receiptNips}}
+                {{master.rateNips}}
             </td>
             <!-- Amount -->
             <td>
@@ -148,6 +148,18 @@
                 <td>{{getTotalOpeningQuarts()}}</td>
                 <td>{{getTotalOpeningPints()}}</td>
                 <td>{{getTotalOpeningNips()}}</td>
+
+                <td>{{getTotalTransferQuarts()}}</td>
+                <td>{{getTotalTransferPints()}}</td>
+                <td>{{getTotalTransferNips()}}</td>
+
+
+                <td>{{getReceiptQuarts()}}</td>
+                <td>{{getReceiptPints()}}</td>
+                <td>{{getReceiptNips()}}</td>
+
+
+
 
             </tr>
         </tfoot>
