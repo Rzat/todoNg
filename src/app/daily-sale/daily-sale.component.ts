@@ -10,7 +10,8 @@ import { DailySaleService } from '../service/data/daily-sale.service';
 export class DailySaleComponent implements OnInit {
   shops = [];
   newArr = [];
-
+  items = [];
+  netAmount: string;
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
 
@@ -40,8 +41,31 @@ export class DailySaleComponent implements OnInit {
     this.dailySaleService.findAllByShopName('rajat', e.value).subscribe(
       response => {
         console.log(response)
+        this.items = response;
       }
     )
+  }
+
+  addToCart() {
+    console.log('@@@' + JSON.stringify(this.items));
+  }
+
+  getTotalOpeningQuarts() {
+    return this.items.map(t => t.openingQuarts).reduce((acc, value) => acc + value, 0);
+  }
+
+  getTotalOpeningPints() {
+    return this.items.map(t => t.openingPints).reduce((acc, value) => acc + value, 0);
+  }
+
+  getTotalOpeningNips() {
+    return this.items.map(t => t.openingNips).reduce((acc, value) => acc + value, 0);
+  }
+
+  getNetAmount(amountQuarts, amountPints, amountNips) {
+    console.log(amountQuarts + 'aaa' + amountPints + 'aaaa' + amountNips)
+    var sum = amountQuarts + amountPints + amountNips;
+    return sum;
   }
 
 }

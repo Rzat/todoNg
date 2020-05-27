@@ -22,7 +22,7 @@ import { AddingParchaTypeComponent } from './adding-parcha-type/adding-parcha-ty
 import { MasterShopEntryComponent } from './master-shop-entry/master-shop-entry.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule, MatInputModule, MatSelectModule, MatListModule, MatTableModule, MatGridListModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSelectModule, MatListModule, MatTableModule, MatGridListModule, MatCheckboxModule } from '@angular/material';
 import { DailyPurchaseComponent } from './daily-purchase/daily-purchase.component';
 import { FormGroupExampleComponent } from './form-group-example/form-group-example.component';
 import { TestComponent } from './test/test.component';
@@ -68,7 +68,8 @@ import { DailySaleComponent } from './daily-sale/daily-sale.component';
     MatSelectModule,
     MatListModule,
     MatTableModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true }
