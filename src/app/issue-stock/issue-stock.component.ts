@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IssueStock } from '../master/master.component';
+import { IssueStock, DailyPurchase } from '../master/master.component';
 import { AddingParchaService } from '../adding-parcha.service';
 import { MasterBrandEntryService } from '../service/data/master-brand-entry.service';
+import { DailyPurchaseService } from '../service/data/daily-purchase.service';
 
 @Component({
   selector: 'app-issue-stock',
@@ -26,7 +27,8 @@ export class IssueStockComponent implements OnInit {
 
 
   constructor(private masterBrandEntryService: MasterBrandEntryService,
-    private addingParchaService: AddingParchaService) { }
+    private addingParchaService: AddingParchaService,
+    private dailyPurchaseService: DailyPurchaseService) { }
 
   ngOnInit(): void {
     this.retrieveShopNames();
@@ -82,11 +84,11 @@ export class IssueStockComponent implements OnInit {
     console.log('final json' + JSON.stringify(data))
 
     //Todo
-    // this.dailyPurchaseService.saveDailyPurchase('rajat', data).subscribe(
-    //   response => {
-    //     console.log(response);
-    //   }
-    // )
+    this.dailyPurchaseService.saveDailyIssueStock('rajat', data).subscribe(
+      response => {
+        console.log(response);
+      }
+    )
   }
 
 

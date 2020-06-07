@@ -13,4 +13,9 @@ export class DailyPurchaseService {
     return this.httpClient.post(`${API_URL}/users/${username}/saveDailyPurchase`,
       dailyPurchase);
   }
+
+  saveDailyIssueStock(username, issueStock) {
+    return this.httpClient.post(`${API_URL}/users/${username}/saveStock`,
+    issueStock);
+  }
 }
