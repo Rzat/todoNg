@@ -68,28 +68,13 @@ export class DailySaleComponent implements OnInit {
   }
 
   findQuartsSale(e, brandName, i) {
-    let itemLength = this.items.length;
-
     var index = this.items.findIndex(x => x.brandName === brandName)
-    //console.log('index is: ' + index);
-    //console.log('array of index: ' + JSON.stringify(this.items[index]))
-    let stringArr = JSON.stringify(this.items[index]);
-
     let newArray = [...this.items]
-    newArray[index] = { ...newArray[index], saleQuarts: 66 }
-
+    let saleQ = newArray[index];
+    let finalSaleQ = saleQ.openingQuarts + saleQ.receiptQuarts - saleQ.transferQuarts - saleQ.closingQuarts;
+    newArray[index] = { ...newArray[index], saleQuarts: finalSaleQ }
     this.items = newArray;
-    console.log('newArray is::' + JSON.stringify(this.items))
-
-    // this.items = this.items.map(item => {
-    //   item.saleQuarts = 0
-    //   return item;
-    // });
-
   }
-
-
-
 
   addToCart() {
     console.log('@@@' + JSON.stringify(this.items));
