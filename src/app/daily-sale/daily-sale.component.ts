@@ -126,7 +126,6 @@ export class DailySaleComponent implements OnInit {
 
       //final amount for Q
       let finalAMountQ = finalSaleP * saleP.rateQuarts;
-      console.log(finalAMountQ + 'Amount final ')
       newArray[index] = { ...newArray[index], amountQuarts: finalAMountQ }
       this.items = newArray;
 
@@ -138,7 +137,6 @@ export class DailySaleComponent implements OnInit {
 
       //final amount for P
       let finalAMountP = finalSaleP * saleP.ratePints;
-      console.log(finalAMountP + 'Amount final ')
       newArray[index] = { ...newArray[index], amountPints: finalAMountP }
       this.items = newArray;
 
@@ -150,7 +148,6 @@ export class DailySaleComponent implements OnInit {
 
       //final amount for N
       let finalAMountN = finalSaleP * saleP.rateNips;
-      console.log(finalAMountN + 'Amount final ')
       newArray[index] = { ...newArray[index], amountNips: finalAMountN }
       this.items = newArray;
     }
