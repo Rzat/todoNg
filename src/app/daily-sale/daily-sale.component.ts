@@ -49,7 +49,7 @@ export class DailySaleComponent implements OnInit {
     this.div1 = true;
     this.dailySaleService.findAllByShopName('rajat', e.value).subscribe(
       response => {
-        //  console.log(response)
+        // console.log(response)
 
         let len = response.length;
         for (let i = 0; i < len; i++) {
@@ -57,14 +57,43 @@ export class DailySaleComponent implements OnInit {
           this.items[i].closingQuarts = 0;
           this.items[i].closingPints = 0;
           this.items[i].closingNips = 0;
+          this.findRateByShopNameAndBrandName(e.value, this.items[i].brandName);
         }
-
+        // console.log(JSON.stringify(this.items));
         //check for empty array
         if (response.length === 0) {
           this.div1 = false;
         }
+
       }
     )
+  }
+
+  findRateByShopNameAndBrandName(e, brandName) {
+    this.dailySaleService.findRateByShopNameAndBrandName('rajat', e, brandName).subscribe(
+      response => {
+        console.log('findBy' + JSON.stringify(response));
+        var index = this.items.findIndex(x => x.brandName === brandName)
+        let newArray = [...this.items];
+        let responseArr = response;
+
+        //setting Q rate
+        let rateQ = responseArr.quarts;
+        newArray[index] = { ...newArray[index], rateQuarts: rateQ }
+        this.items = newArray;
+
+        //setting P rate
+        let rateP = responseArr.pints;
+        newArray[index] = { ...newArray[index], ratePints: rateP }
+        this.items = newArray;
+
+        //setting N rate
+        let rateN = responseArr.nips;
+        newArray[index] = { ...newArray[index], rateNips: rateN }
+        this.items = newArray;
+      }
+    )
+
   }
 
   findQuartsSale(brandName) {
