@@ -67,14 +67,40 @@ export class DailySaleComponent implements OnInit {
     )
   }
 
-  findQuartsSale(e, brandName, i) {
+  findQuartsSale(brandName) {
+    let Q = 'Q';
+    this.finalSale(brandName, Q)
+  }
+
+  findPintsSale(brandName) {
+    let P = 'P';
+    this.finalSale(brandName, P)
+  }
+
+  findNipsSale(brandName) {
+    let N = 'N';
+    this.finalSale(brandName, N)
+  }
+
+  finalSale(brandName, qpn) {
     var index = this.items.findIndex(x => x.brandName === brandName)
     let newArray = [...this.items]
-    let saleQ = newArray[index];
-    let finalSaleQ = saleQ.openingQuarts + saleQ.receiptQuarts - saleQ.transferQuarts - saleQ.closingQuarts;
-    newArray[index] = { ...newArray[index], saleQuarts: finalSaleQ }
-    this.items = newArray;
+    let saleP = newArray[index];
+    if (qpn === 'Q') {
+      let finalSaleP = saleP.openingQuarts + saleP.receiptQuarts - saleP.transferQuarts - saleP.closingQuarts;
+      newArray[index] = { ...newArray[index], saleQuarts: finalSaleP }
+      this.items = newArray;
+    } else if (qpn === 'P') {
+      let finalSaleP = saleP.openingPints + saleP.receiptPints - saleP.transferPints - saleP.closingPints;
+      newArray[index] = { ...newArray[index], salePints: finalSaleP }
+      this.items = newArray;
+    } else if (qpn === 'N') {
+      let finalSaleP = saleP.openingNips + saleP.receiptNips - saleP.transferNips - saleP.closingNips;
+      newArray[index] = { ...newArray[index], saleNips: finalSaleP }
+      this.items = newArray;
+    }
   }
+
 
   addToCart() {
     console.log('@@@' + JSON.stringify(this.items));

@@ -111,16 +111,15 @@
             <!-- Closing Balance -->
             <td>
                 <input type="number" value="" onfocus="this.value=''" [(ngModel)]="master.closingQuarts"
-                    style="width: 65px" required="required"
-                    (input)="findQuartsSale($event.target.value,master.brandName,master)">
+                    style="width: 65px" required="required" (input)="findQuartsSale(master.brandName)">
             </td>
             <td>
                 <input type="number" value="" onfocus="this.value=''" [(ngModel)]="master.closingPints"
-                    style="width: 65px" required="required" (input)="findQuartsSale($event.target.value)">
+                    style="width: 65px" required="required" (input)="findPintsSale(master.brandName)">
             </td>
             <td>
                 <input type="number" value="" onfocus="this.value=''" [(ngModel)]="master.closingNips"
-                    style="width: 65px" required="required" (input)="findQuartsSale($event.target.value)">
+                    style="width: 65px" required="required" (input)="findNipsSale(master.brandName)">
             </td>
             <!-- Rate -->
             <td>
