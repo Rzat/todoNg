@@ -57,6 +57,9 @@ export class DailySaleComponent implements OnInit {
           this.items[i].closingQuarts = 0;
           this.items[i].closingPints = 0;
           this.items[i].closingNips = 0;
+          this.items[i].amountQuarts = 0;
+          this.items[i].amountPints = 0;
+          this.items[i].amountNips = 0;
           this.findRateByShopNameAndBrandName(e.value, this.items[i].brandName);
         }
         // console.log(JSON.stringify(this.items));
@@ -72,7 +75,7 @@ export class DailySaleComponent implements OnInit {
   findRateByShopNameAndBrandName(e, brandName) {
     this.dailySaleService.findRateByShopNameAndBrandName('rajat', e, brandName).subscribe(
       response => {
-        console.log('findBy' + JSON.stringify(response));
+        //console.log('findBy' + JSON.stringify(response));
         var index = this.items.findIndex(x => x.brandName === brandName)
         let newArray = [...this.items];
         let responseArr = response;
@@ -116,16 +119,39 @@ export class DailySaleComponent implements OnInit {
     let newArray = [...this.items]
     let saleP = newArray[index];
     if (qpn === 'Q') {
+      //final sale for Q
       let finalSaleP = saleP.openingQuarts + saleP.receiptQuarts - saleP.transferQuarts - saleP.closingQuarts;
       newArray[index] = { ...newArray[index], saleQuarts: finalSaleP }
+      //this.items = newArray;
+
+      //final amount for Q
+      let finalAMountQ = finalSaleP * saleP.rateQuarts;
+      console.log(finalAMountQ + 'Amount final ')
+      newArray[index] = { ...newArray[index], amountQuarts: finalAMountQ }
       this.items = newArray;
+
     } else if (qpn === 'P') {
+      //final sale for P
       let finalSaleP = saleP.openingPints + saleP.receiptPints - saleP.transferPints - saleP.closingPints;
       newArray[index] = { ...newArray[index], salePints: finalSaleP }
+      //this.items = newArray;
+
+      //final amount for P
+      let finalAMountP = finalSaleP * saleP.ratePints;
+      console.log(finalAMountP + 'Amount final ')
+      newArray[index] = { ...newArray[index], amountPints: finalAMountP }
       this.items = newArray;
+
     } else if (qpn === 'N') {
+      //final sale for N
       let finalSaleP = saleP.openingNips + saleP.receiptNips - saleP.transferNips - saleP.closingNips;
       newArray[index] = { ...newArray[index], saleNips: finalSaleP }
+      //this.items = newArray;
+
+      //final amount for N
+      let finalAMountN = finalSaleP * saleP.rateNips;
+      console.log(finalAMountN + 'Amount final ')
+      newArray[index] = { ...newArray[index], amountNips: finalAMountN }
       this.items = newArray;
     }
   }
