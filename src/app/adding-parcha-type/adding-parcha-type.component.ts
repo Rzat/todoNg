@@ -11,7 +11,8 @@ export class AddingParcha {
     public quarts: number,
     public pints: number,
     public nips: number,
-    public brandName: string
+    public brandName: string,
+    public brandType: string
   ) {
 
   }
@@ -60,7 +61,7 @@ export class AddingParchaTypeComponent implements OnInit {
     private addingParchaService: AddingParchaService) { }
 
   ngOnInit() {
-    this.createParcha = new AddingParcha('', 0, 0, 0, 0, '');
+    this.createParcha = new AddingParcha('', 0, 0, 0, 0, '','');
     this.retrieveBrandName();
 
   }

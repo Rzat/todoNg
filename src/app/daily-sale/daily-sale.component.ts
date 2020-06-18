@@ -19,6 +19,8 @@ export class DailySaleComponent implements OnInit {
     closingNips: 0
   };
   singleObject = [];
+  i: number;
+  clSale = 0;
 
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
@@ -52,15 +54,17 @@ export class DailySaleComponent implements OnInit {
         // console.log(response)
 
         let len = response.length;
-        for (let i = 0; i < len; i++) {
-          this.items.push(response[i]);
-          this.items[i].closingQuarts = 0;
-          this.items[i].closingPints = 0;
-          this.items[i].closingNips = 0;
-          this.items[i].amountQuarts = 0;
-          this.items[i].amountPints = 0;
-          this.items[i].amountNips = 0;
-          this.findRateByShopNameAndBrandName(e.value, this.items[i].brandName);
+        for (this.i = 0; this.i < len; this.i++) {
+          this.items.push(response[this.i]);
+          this.items[this.i].closingQuarts = 0;
+          this.items[this.i].closingPints = 0;
+          this.items[this.i].closingNips = 0;
+          this.items[this.i].amountQuarts = 0;
+          this.items[this.i].amountPints = 0;
+          this.items[this.i].amountNips = 0;
+          this.items[this.i].brandType = '';
+          this.findRateByShopNameAndBrandName(e.value, this.items[this.i].brandName);
+
         }
         // console.log(JSON.stringify(this.items));
         //check for empty array
@@ -75,10 +79,17 @@ export class DailySaleComponent implements OnInit {
   findRateByShopNameAndBrandName(e, brandName) {
     this.dailySaleService.findRateByShopNameAndBrandName('rajat', e, brandName).subscribe(
       response => {
+
         //console.log('findBy' + JSON.stringify(response));
+
         var index = this.items.findIndex(x => x.brandName === brandName)
         let newArray = [...this.items];
         let responseArr = response;
+
+        //adding brandType in item array for Sale
+        let brandType = responseArr.brandType;
+        newArray[index] = { ...newArray[index], brandType: brandType }
+        this.items = newArray;
 
         //setting Q rate
         let rateQ = responseArr.quarts;
@@ -129,6 +140,16 @@ export class DailySaleComponent implements OnInit {
       newArray[index] = { ...newArray[index], amountQuarts: finalAMountQ }
       this.items = newArray;
 
+      // adding total Q for CL field
+      if (newArray[index].brandType === 'DESI') {
+        this.clSale = this.clSale + finalAMountQ;
+        console.log('inside desi' + this.clSale)
+      }
+
+      if (newArray[index].brandType === 'ENGLISH') {
+        console.log('inside ENGLISH')
+      }
+
     } else if (qpn === 'P') {
       //final sale for P
       let finalSaleP = saleP.openingPints + saleP.receiptPints - saleP.transferPints - saleP.closingPints;
@@ -140,6 +161,12 @@ export class DailySaleComponent implements OnInit {
       newArray[index] = { ...newArray[index], amountPints: finalAMountP }
       this.items = newArray;
 
+      // adding total P for CL field
+      if (newArray[index].brandType === 'DESI') {
+        this.clSale = this.clSale + finalAMountP;
+        console.log('inside desi' + this.clSale)
+      }
+
     } else if (qpn === 'N') {
       //final sale for N
       let finalSaleP = saleP.openingNips + saleP.receiptNips - saleP.transferNips - saleP.closingNips;
@@ -150,6 +177,12 @@ export class DailySaleComponent implements OnInit {
       let finalAMountN = finalSaleP * saleP.rateNips;
       newArray[index] = { ...newArray[index], amountNips: finalAMountN }
       this.items = newArray;
+
+      // adding total N for CL field
+      if (newArray[index].brandType === 'DESI') {
+        this.clSale = this.clSale + finalAMountN;
+        console.log('inside desi' + this.clSale)
+      }
     }
   }
 
