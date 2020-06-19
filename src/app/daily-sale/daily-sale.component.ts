@@ -21,6 +21,8 @@ export class DailySaleComponent implements OnInit {
   singleObject = [];
   i: number;
   clSale = 0;
+  bSale = 0;
+  imflSale = 0;
 
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
@@ -146,8 +148,16 @@ export class DailySaleComponent implements OnInit {
         console.log('inside desi' + this.clSale)
       }
 
+      // adding total q for bsALE field
+      if (newArray[index].brandType === 'BEER') {
+        this.bSale = this.bSale + finalAMountQ;
+        console.log('inside desi' + this.bSale)
+      }
+
+      // adding total q for imfl field
       if (newArray[index].brandType === 'ENGLISH') {
         console.log('inside ENGLISH')
+        this.imflSale = this.imflSale + finalAMountQ;
       }
 
     } else if (qpn === 'P') {
@@ -167,6 +177,18 @@ export class DailySaleComponent implements OnInit {
         console.log('inside desi' + this.clSale)
       }
 
+      // adding total P for bsALE field
+      if (newArray[index].brandType === 'BEER') {
+        this.bSale = this.bSale + finalAMountP;
+        console.log('inside desi' + this.bSale)
+      }
+
+      // adding total P for imfl field
+      if (newArray[index].brandType === 'ENGLISH') {
+        console.log('inside ENGLISH')
+        this.imflSale = this.imflSale + finalAMountP;
+      }
+
     } else if (qpn === 'N') {
       //final sale for N
       let finalSaleP = saleP.openingNips + saleP.receiptNips - saleP.transferNips - saleP.closingNips;
@@ -182,6 +204,18 @@ export class DailySaleComponent implements OnInit {
       if (newArray[index].brandType === 'DESI') {
         this.clSale = this.clSale + finalAMountN;
         console.log('inside desi' + this.clSale)
+      }
+
+      // adding total N for bsALE field
+      if (newArray[index].brandType === 'BEER') {
+        this.bSale = this.bSale + finalAMountN;
+        console.log('inside desi' + this.bSale)
+      }
+
+      // adding total N for imfl field
+      if (newArray[index].brandType === 'ENGLISH') {
+        console.log('inside ENGLISH')
+        this.imflSale = this.imflSale + finalAMountN;
       }
     }
   }
