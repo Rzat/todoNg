@@ -23,6 +23,11 @@ export class DailySaleComponent implements OnInit {
   clSale = 0;
   bSale = 0;
   imflSale = 0;
+  groupCLosing = 0;
+  groupTotal = 0;
+  groupArray = [];
+  AddingParchaGroup = [];
+  map = new Map();
 
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
@@ -83,10 +88,19 @@ export class DailySaleComponent implements OnInit {
       response => {
 
         //console.log('findBy' + JSON.stringify(response));
-
+        this.AddingParchaGroup.push(response);
         var index = this.items.findIndex(x => x.brandName === brandName)
         let newArray = [...this.items];
         let responseArr = response;
+
+        //making K.V pair for G.Closing 
+        let groupNumber = response.groupNumber;
+        if (this.groupArray.indexOf(groupNumber) == -1) {
+          this.groupArray.push(groupNumber);
+          this.map.set(groupNumber, 0);
+        }
+
+
 
         //adding brandType in item array for Sale
         let brandType = responseArr.brandType;
@@ -160,6 +174,18 @@ export class DailySaleComponent implements OnInit {
         this.imflSale = this.imflSale + finalAMountQ;
       }
 
+      //adding GroupClosing, means toatl of same group
+      var indexAP = this.items.findIndex(x => x.brandName === brandName)
+      let keys = this.AddingParchaGroup[indexAP].groupNumber;
+      let valueOfExistingKey = this.map.get(keys);
+      let valueToBeSet = valueOfExistingKey + saleP.closingQuarts;
+      this.map.set(keys, valueToBeSet);
+      this.groupCLosing = this.map.get(keys);
+      console.log(this.groupCLosing + 'new Group CLosing')
+
+      //adding Group Total, means toatl of group closing
+
+
     } else if (qpn === 'P') {
       //final sale for P
       let finalSaleP = saleP.openingPints + saleP.receiptPints - saleP.transferPints - saleP.closingPints;
@@ -223,6 +249,9 @@ export class DailySaleComponent implements OnInit {
 
   addToCart() {
     console.log('@@@' + JSON.stringify(this.items));
+    console.log('final K.V' + this.map.get(4));
+    console.log('final K.V' + this.map.get(2));
+    console.log('final K.V' + this.map.get(3));
   }
 
 
