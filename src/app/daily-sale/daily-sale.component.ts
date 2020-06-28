@@ -29,6 +29,16 @@ export class DailySaleComponent implements OnInit {
   AddingParchaGroup = [];
   map = new Map();
 
+  //K.V fro G.C P
+  groupClosingP = 0;
+  mapP = new Map();
+  groupArrayP = [];
+
+  //K.V fro G.C P
+  groupClosingN = 0;
+  mapN = new Map();
+  groupArrayN = [];
+
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
 
@@ -93,14 +103,26 @@ export class DailySaleComponent implements OnInit {
         let newArray = [...this.items];
         let responseArr = response;
 
-        //making K.V pair for G.Closing 
+        //making K.V pair for G.Closing Q
         let groupNumber = response.groupNumber;
         if (this.groupArray.indexOf(groupNumber) == -1) {
           this.groupArray.push(groupNumber);
           this.map.set(groupNumber, 0);
         }
 
+        //making K.V parir for G.Closing P
+        let groupNumberP = response.groupNumber;
+        if (this.groupArrayP.indexOf(groupNumberP) == -1) {
+          this.groupArrayP.push(groupNumberP);
+          this.mapP.set(groupNumberP, 0);
+        }
 
+        //making K.V pair for G.Closing N
+        let groupNumberN = response.groupNumber;
+        if (this.groupArrayN.indexOf(groupNumberN) == -1) {
+          this.groupArrayN.push(groupNumberN);
+          this.mapN.set(groupNumberN, 0);
+        }
 
         //adding brandType in item array for Sale
         let brandType = responseArr.brandType;
@@ -183,8 +205,9 @@ export class DailySaleComponent implements OnInit {
       this.groupCLosing = this.map.get(keys);
       console.log(this.groupCLosing + 'new Group CLosing')
 
-      //adding Group Total, means toatl of group closing
-
+      //setting previous values of PN for G.CLosing
+      this.groupClosingP = this.mapP.get(keys);
+      this.groupClosingN = this.mapN.get(keys);
 
     } else if (qpn === 'P') {
       //final sale for P
@@ -215,6 +238,19 @@ export class DailySaleComponent implements OnInit {
         this.imflSale = this.imflSale + finalAMountP;
       }
 
+      //adding GroupClosingP, means toatl of same group
+      var indexAPP = this.items.findIndex(x => x.brandName === brandName)
+      let keysP = this.AddingParchaGroup[indexAPP].groupNumber;
+      let valueOfExistingKeyP = this.mapP.get(keysP);
+      let valueToBeSetP = valueOfExistingKeyP + saleP.closingPints;
+      this.mapP.set(keysP, valueToBeSetP);
+      this.groupClosingP = this.mapP.get(keysP);
+      console.log(this.groupClosingP + 'new Group ClosingP')
+
+      //setting previous values of QN for G.CLosing
+      this.groupCLosing = this.map.get(keysP);
+      this.groupClosingN = this.mapN.get(keysP);
+
     } else if (qpn === 'N') {
       //final sale for N
       let finalSaleP = saleP.openingNips + saleP.receiptNips - saleP.transferNips - saleP.closingNips;
@@ -243,6 +279,20 @@ export class DailySaleComponent implements OnInit {
         console.log('inside ENGLISH')
         this.imflSale = this.imflSale + finalAMountN;
       }
+
+      //adding Group Total, means toatl Amount of group closing
+      var indexAPN = this.items.findIndex(x => x.brandName === brandName)
+      let keysN = this.AddingParchaGroup[indexAPN].groupNumber;
+      let valueOfExistingKeyN = this.mapN.get(keysN);
+      let valueToBeSetN = valueOfExistingKeyN + saleP.closingNips;
+      this.mapN.set(keysN, valueToBeSetN);
+      this.groupClosingN = this.mapN.get(keysN);
+      console.log(this.groupClosingP + 'new Group ClosingN')
+
+      //setting previous values of QP for G.CLosing
+      this.groupCLosing = this.map.get(keysN);
+      this.groupClosingP = this.mapP.get(keysN);
+
     }
   }
 

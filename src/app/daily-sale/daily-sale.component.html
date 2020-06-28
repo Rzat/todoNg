@@ -142,7 +142,7 @@
                 {{master.amountNips}}
             </td>
             <td>
-                {{getNetAmount(master.receiptQuarts,master.receiptPints,master.receiptNips)}}
+                {{getNetAmount(master.amountQuarts,master.amountPints,master.amountNips)}}
             </td>
         </tr>
         <tfoot>
@@ -187,10 +187,11 @@
     </table>
 
     <div>
-        <label>G.Closing &nbsp;</label>{{groupCLosing}}
+        <label>G.Closing &nbsp;</label>{{groupCLosing}} &nbsp; {{groupClosingP}} &nbsp; {{groupClosingN}}
         <label style="padding-left:10em">C.L. &nbsp;</label> {{clSale}}
-        <label style="padding-left:20em">B &nbsp;</label>{{bSale}}
-        <label style="padding-left:20em">IMFL &nbsp;</label>{{imflSale}}
+        <label style="padding-left:10em">B &nbsp;</label>{{bSale}}
+        <label style="padding-left:10em">IMFL &nbsp;</label>{{imflSale}}
+        <label style="padding-left:10em">G.Total &nbsp;</label>0
     </div>
 
     <div class="absolute">
