@@ -29,15 +29,21 @@ export class DailySaleComponent implements OnInit {
   AddingParchaGroup = [];
   map = new Map();
 
-  //K.V fro G.C P
+  //K.V for G.C P
   groupClosingP = 0;
   mapP = new Map();
   groupArrayP = [];
 
-  //K.V fro G.C P
+  //K.V for G.C N
   groupClosingN = 0;
   mapN = new Map();
   groupArrayN = [];
+
+  mapGTotal = new Map();
+  gTotal = 0;
+  sum = 0;
+  getNetAmountGrandTotal = 0;
+  netReceivable = 0;
 
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
@@ -122,6 +128,7 @@ export class DailySaleComponent implements OnInit {
         if (this.groupArrayN.indexOf(groupNumberN) == -1) {
           this.groupArrayN.push(groupNumberN);
           this.mapN.set(groupNumberN, 0);
+          this.mapGTotal.set(groupNumberN, 0);
         }
 
         //adding brandType in item array for Sale
@@ -167,7 +174,17 @@ export class DailySaleComponent implements OnInit {
     var index = this.items.findIndex(x => x.brandName === brandName)
     let newArray = [...this.items]
     let saleP = newArray[index];
+
     if (qpn === 'Q') {
+
+      //if user fill CB as 0
+      if (newArray[index].closingQuarts != 0) {
+        console.log('not equal to 0');
+      } else {
+        console.log('equal to 0');
+        return;
+      }
+
       //final sale for Q
       let finalSaleP = saleP.openingQuarts + saleP.receiptQuarts - saleP.transferQuarts - saleP.closingQuarts;
       newArray[index] = { ...newArray[index], saleQuarts: finalSaleP }
@@ -208,6 +225,14 @@ export class DailySaleComponent implements OnInit {
       //setting previous values of PN for G.CLosing
       this.groupClosingP = this.mapP.get(keys);
       this.groupClosingN = this.mapN.get(keys);
+
+
+      //adding GroupTotal for same group
+      let gTotalValue = this.items[indexAP].amountQuarts;
+      let valueOfExistingGTotalKey = this.mapGTotal.get(keys);
+      let valueToBeSetGTotal = valueOfExistingGTotalKey + gTotalValue;
+      this.mapGTotal.set(keys, valueToBeSetGTotal);
+      this.gTotal = this.mapGTotal.get(keys);
 
     } else if (qpn === 'P') {
       //final sale for P
@@ -251,6 +276,13 @@ export class DailySaleComponent implements OnInit {
       this.groupCLosing = this.map.get(keysP);
       this.groupClosingN = this.mapN.get(keysP);
 
+      //adding GroupTotal for same group
+      let gTotalValue = this.items[indexAPP].amountPints;
+      let valueOfExistingGTotalKey = this.mapGTotal.get(keysP);
+      let valueToBeSetGTotal = valueOfExistingGTotalKey + gTotalValue;
+      this.mapGTotal.set(keysP, valueToBeSetGTotal);
+      this.gTotal = this.mapGTotal.get(keysP);
+
     } else if (qpn === 'N') {
       //final sale for N
       let finalSaleP = saleP.openingNips + saleP.receiptNips - saleP.transferNips - saleP.closingNips;
@@ -293,8 +325,23 @@ export class DailySaleComponent implements OnInit {
       this.groupCLosing = this.map.get(keysN);
       this.groupClosingP = this.mapP.get(keysN);
 
+      //adding GroupTotal for same group
+      let gTotalValue = this.items[indexAPN].amountNips;
+      let valueOfExistingGTotalKey = this.mapGTotal.get(keysN);
+      let valueToBeSetGTotal = valueOfExistingGTotalKey + gTotalValue;
+      this.mapGTotal.set(keysN, valueToBeSetGTotal);
+      this.gTotal = this.mapGTotal.get(keysN);
+
     }
   }
+
+
+  getNetAmount(amountQuarts, amountPints, amountNips) {
+    // console.log(amountQuarts + 'aaa' + amountPints + 'aaaa' + amountNips)
+    this.sum = amountQuarts + amountPints + amountNips;
+    return this.sum;
+  }
+
 
 
   addToCart() {
@@ -372,14 +419,6 @@ export class DailySaleComponent implements OnInit {
     return this.items.map(t => t.rateNips).reduce((acc, value) => acc + value, 0);
   }
 
-
-
-  getNetAmount(amountQuarts, amountPints, amountNips) {
-    // console.log(amountQuarts + 'aaa' + amountPints + 'aaaa' + amountNips)
-    var sum = amountQuarts + amountPints + amountNips;
-    return sum;
-  }
-
   getAmountGrandTotalQuarts() {
     return this.items.map(t => t.amountQuarts).reduce((acc, value) => acc + value, 0);
 
@@ -395,6 +434,21 @@ export class DailySaleComponent implements OnInit {
   }
 
   getNetAmountGrandTotaal() {
+    let amountQ = this.items.map(t => t.amountQuarts).reduce((acc, value) => acc + value, 0);
+    let amountP = this.items.map(t => t.amountPints).reduce((acc, value) => acc + value, 0);
+    let amountN = this.items.map(t => t.amountNips).reduce((acc, value) => acc + value, 0);
+    this.getNetAmountGrandTotal = amountQ + amountP + amountN;
+    return this.getNetAmountGrandTotal;
+  }
+
+  getExpense(e) {
+    let getNetAmountGT = this.getNetAmountGrandTotal - e.target.value;
+    this.netReceivable = getNetAmountGT;
+  }
+  getReceive(e) {
+    let getReceive = +e.target.value + this.netReceivable;
+    console.log(getReceive + '::NR')
+    this.netReceivable = getReceive;
 
   }
 

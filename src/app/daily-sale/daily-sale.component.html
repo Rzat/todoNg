@@ -181,6 +181,7 @@
                 <td>{{getAmountGrandTotalPints()}}</td>
                 <td>{{getAmountGrandTotalNips()}}</td>
 
+                <td>{{getNetAmountGrandTotaal()}}</td>
 
             </tr>
         </tfoot>
@@ -191,7 +192,15 @@
         <label style="padding-left:10em">C.L. &nbsp;</label> {{clSale}}
         <label style="padding-left:10em">B &nbsp;</label>{{bSale}}
         <label style="padding-left:10em">IMFL &nbsp;</label>{{imflSale}}
-        <label style="padding-left:10em">G.Total &nbsp;</label>0
+        <label style="padding-left:10em">G.Total &nbsp;</label>{{gTotal}}
+    </div>
+    <div>
+        Expense <input type="number" style="width: 65px" (keydown.enter)="getExpense($event)">
+        Receive <input type="number" style="width: 65px" (keydown.enter)="getReceive($event)"> =
+        Net Receive <input type="number" style="width: 65px" readonly value={{netReceivable}}>
+        <!-- <label>make separate functions for G.Closing and G.Total,CL, B, Imfl and use local variable instead of global
+            bec. values are changing if writing CB
+            again if not possible make a clear button</label> -->
     </div>
 
     <div class="absolute">
