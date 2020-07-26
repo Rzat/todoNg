@@ -28,6 +28,8 @@ import { FormGroupExampleComponent } from './form-group-example/form-group-examp
 import { TestComponent } from './test/test.component';
 import { IssueStockComponent } from './issue-stock/issue-stock.component';
 import { DailySaleComponent } from './daily-sale/daily-sale.component';
+import { ReportsComponent } from './reports/reports.component';
+import { StockPositionComponent } from './stock-position/stock-position.component';
 
 
 
@@ -53,7 +55,9 @@ import { DailySaleComponent } from './daily-sale/daily-sale.component';
     FormGroupExampleComponent,
     TestComponent,
     IssueStockComponent,
-    DailySaleComponent
+    DailySaleComponent,
+    ReportsComponent,
+    StockPositionComponent
   ],
   imports: [
     BrowserModule,

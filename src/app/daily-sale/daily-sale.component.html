@@ -110,16 +110,16 @@
             </td>
             <!-- Closing Balance -->
             <td>
-                <input type="number" value="" onfocus="this.value=''" [(ngModel)]="master.closingQuarts"
-                    style="width: 65px" required="required" (input)="findQuartsSale(master.brandName)">
+                <input type="number" value="" [(ngModel)]="master.closingQuarts" style="width: 65px" required="required"
+                    (keydown.enter)="findQuartsSale(master.brandName)">
             </td>
             <td>
-                <input type="number" value="" onfocus="this.value=''" [(ngModel)]="master.closingPints"
-                    style="width: 65px" required="required" (input)="findPintsSale(master.brandName)">
+                <input type="number" value="" [(ngModel)]="master.closingPints" style="width: 65px" required="required"
+                    (keydown.enter)="findPintsSale(master.brandName)">
             </td>
             <td>
-                <input type="number" value="" onfocus="this.value=''" [(ngModel)]="master.closingNips"
-                    style="width: 65px" required="required" (input)="findNipsSale(master.brandName)">
+                <input type="number" value="" [(ngModel)]="master.closingNips" style="width: 65px" required="required"
+                    (keydown.enter)="findNipsSale(master.brandName)">
             </td>
             <!-- Rate -->
             <td>
@@ -188,16 +188,107 @@
     </table>
 
     <div>
-        <label>G.Closing &nbsp;</label>{{groupCLosing}} &nbsp; {{groupClosingP}} &nbsp; {{groupClosingN}}
-        <label style="padding-left:10em">C.L. &nbsp;</label> {{clSale}}
-        <label style="padding-left:10em">B &nbsp;</label>{{bSale}}
-        <label style="padding-left:10em">IMFL &nbsp;</label>{{imflSale}}
-        <label style="padding-left:10em">G.Total &nbsp;</label>{{gTotal}}
+        <label>G.Closing &nbsp;</label>{{groupCLosing}} &nbsp; {{groupClosingP}}
+        &nbsp;{{groupClosingN}}
+        <label>G.Total &nbsp;</label>{{gTotal}}
+        <label>C.L. &nbsp;</label> {{clSale}}
+        <label>B &nbsp;</label>{{bSale}}
+        <label>IMFL &nbsp;</label>{{imflSale}}
+        <label>Total &nbsp;</label>{{totalCLBIMFL()}}
+        <label>Net Receive &nbsp;</label>{{getNetAmountGT}}
     </div>
+
+    <div style="width:100%">
+        <table id="table" style="display: inline-block">
+
+            <tr>
+                <th>Expense</th>
+                <th>Values</th>
+            </tr>
+            <tr>
+                <td> Shop Expense </td>
+                <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="shopExpense"
+                        (keydown.enter)="getExpense($event)"></td>
+            </tr>
+            <tr>
+                <td> Commission </td>
+                <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="commission"
+                        (keydown.enter)="getExpense($event)"></td>
+            </tr>
+            <tr>
+                <td> Rate Deff(DR) </td>
+                <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="rateDiff"
+                        (keydown.enter)="getExpense($event)"></td>
+            </tr>
+            <tr>
+                <td> Breakage </td>
+                <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="breakage"
+                        (keydown.enter)="getExpense($event)"></td>
+            </tr>
+            <tr>
+                <td> W Exp </td>
+                <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="wineExp"
+                        (keydown.enter)="getExpense($event)">
+                </td>
+            </tr>
+            <tr>
+                <td> DR </td>
+                <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="dr"
+                        (keydown.enter)="getExpense($event)"></td>
+            </tr>
+            <tr>
+                <td>Total Expense</td>
+                <td>{{getTotalExpense}}</td>
+            </tr>
+            <tr>
+                <td> Particulars </td>
+                <td><textarea></textarea></td>
+            </tr>
+        </table>
+
+        <table id=" table2" style="float: right;">
+            <tbody>
+                <tr>
+                    <th>Receive</th>
+                    <th>Values</th>
+                </tr>
+                <tr>
+                    <td> Rate Diff(CR) </td>
+                    <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="rateDiffCR"
+                            (keydown.enter)="getReceive($event)"></td>
+                </tr>
+                <tr>
+                    <td> A Income </td>
+                    <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="aIncome"
+                            (keydown.enter)="getReceive($event)"></td>
+                </tr>
+                <tr>
+                    <td> Fine </td>
+                    <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="fine"
+                            (keydown.enter)="getReceive($event)"></td>
+                </tr>
+                <tr>
+                    <td> CR </td>
+                    <td><input type="number" onfocus="this.value=''" style="width: 65px" [(ngModel)]="cr"
+                            (keydown.enter)="getReceive($event)"></td>
+                </tr>
+                <tr>
+                    <td>Total Receive</td>
+                    <td>{{getReceiveAmount}}</td>
+                </tr>
+                <tr>
+                    <td> Particulars </td>
+                    <td><textarea></textarea></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
     <div>
-        Expense <input type="number" style="width: 65px" (keydown.enter)="getExpense($event)">
-        Receive <input type="number" style="width: 65px" (keydown.enter)="getReceive($event)"> =
-        Net Receive <input type="number" style="width: 65px" readonly value={{netReceivable}}>
+
         <!-- <label>make separate functions for G.Closing and G.Total,CL, B, Imfl and use local variable instead of global
             bec. values are changing if writing CB
             again if not possible make a clear button</label> -->

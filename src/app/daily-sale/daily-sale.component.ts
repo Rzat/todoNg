@@ -45,6 +45,22 @@ export class DailySaleComponent implements OnInit {
   getNetAmountGrandTotal = 0;
   netReceivable = 0;
 
+  totalCLBIMFLValue = 0;
+
+  shopExpense = 0;
+  commission = 0;
+  rateDiff = 0
+  breakage = 0;
+  wineExp = 0;
+  dr = 0;
+  totalExpense = 0;
+
+  rateDiffCR = 0;
+  aIncome = 0;
+  fine = 0;
+  cr = 0;
+  toatalReceive = 0;
+
   constructor(private addingParchaService: AddingParchaService,
     private dailySaleService: DailySaleService) { }
 
@@ -98,7 +114,7 @@ export class DailySaleComponent implements OnInit {
       }
     )
   }
-
+  previousSaleQuarts = 0;
   findRateByShopNameAndBrandName(e, brandName) {
     this.dailySaleService.findRateByShopNameAndBrandName('rajat', e, brandName).subscribe(
       response => {
@@ -170,19 +186,20 @@ export class DailySaleComponent implements OnInit {
     this.finalSale(brandName, N)
   }
 
+
   finalSale(brandName, qpn) {
     var index = this.items.findIndex(x => x.brandName === brandName)
     let newArray = [...this.items]
     let saleP = newArray[index];
-
+    let equalTo0 = false;
     if (qpn === 'Q') {
-
       //if user fill CB as 0
       if (newArray[index].closingQuarts != 0) {
-        console.log('not equal to 0');
+        console.log('not equal to 0 ')
       } else {
         console.log('equal to 0');
         return;
+        equalTo0 = true;
       }
 
       //final sale for Q
@@ -190,8 +207,13 @@ export class DailySaleComponent implements OnInit {
       newArray[index] = { ...newArray[index], saleQuarts: finalSaleP }
       //this.items = newArray;
 
+
       //final amount for Q
       let finalAMountQ = finalSaleP * saleP.rateQuarts;
+      if (newArray[index].closingQuarts == 0) {
+        //if CB is equal to 0
+        finalAMountQ = 0;
+      }
       newArray[index] = { ...newArray[index], amountQuarts: finalAMountQ }
       this.items = newArray;
 
@@ -440,16 +462,32 @@ export class DailySaleComponent implements OnInit {
     this.getNetAmountGrandTotal = amountQ + amountP + amountN;
     return this.getNetAmountGrandTotal;
   }
-
+  getTotalExpense = 0;
+  getNetAmountGT = 0
   getExpense(e) {
-    let getNetAmountGT = this.getNetAmountGrandTotal - e.target.value;
-    this.netReceivable = getNetAmountGT;
-  }
-  getReceive(e) {
-    let getReceive = +e.target.value + this.netReceivable;
-    console.log(getReceive + '::NR')
-    this.netReceivable = getReceive;
+    this.getTotalExpense = this.shopExpense + this.wineExp + this.commission + this.rateDiff + this.breakage + this.dr;
+    if (this.getReceiveAmount == 0) {
+      this.getNetAmountGT = this.totalCLBIMFLValue - this.getTotalExpense;
+    } else {
+      this.getNetAmountGT = this.getNetAmountGT - this.getTotalExpense;
+    }
 
+    console.log('getExpense Amount' + this.getNetAmountGT);
+  }
+  getReceiveAmount = 0;
+  getReceive(e) {
+    this.getReceiveAmount = this.rateDiffCR + this.aIncome + this.fine + this.cr;
+    if (this.getNetAmountGT == 0) {
+      this.getNetAmountGT = +this.totalCLBIMFLValue + this.getReceiveAmount;
+    } else {
+      this.getNetAmountGT = +this.getReceiveAmount + this.getNetAmountGT;
+    }
+    console.log('final receiveed amount' + this.getNetAmountGT);
+  }
+
+  totalCLBIMFL() {
+    this.totalCLBIMFLValue = this.clSale + this.bSale + this.imflSale;
+    return this.totalCLBIMFLValue;
   }
 
 

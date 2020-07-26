@@ -1,0 +1,39 @@
+.buttons {
+    width: 25%;
+    table-layout: fixed;
+    text-align: center;
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    border-top-color: rgb(23, 162, 184);
+    border-right-color: rgb(23, 162, 184);
+    border-bottom-color: rgb(23, 162, 184);
+    border-left-color: rgb(23, 162, 184);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    border-radius: .25rem;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition-property: color, background-color, border-color, box-shadow;
+    transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+    transition-delay: 0s, 0s, 0s, 0s;
+}
+
+button {
+    flex: 1;
+    color: teal;
+}
+
+button:hover {
+    box-shadow: 2px 2px teal;
+}

@@ -1,0 +1,64 @@
+<H1>Stock Position</H1>
+
+<div class="container">
+    <form (ngSubmit)="save()">
+        <!-- Property binding and evnt binding -->
+        <fieldset class="form-group">
+            <label>Date upto</label>
+            <input type="date" #dateupto="ngModel" [ngModel]="stockPosition.dateupto | date:'yyyy-MM-dd' "
+                (ngModelChange)="stockPosition.dateupto" class="form-control" name="dateupto">
+        </fieldset>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Select Shop</mat-label>
+            <mat-select #selectShop="ngModel" [(ngModel)]="stockPosition.selectShop" class="form-control"
+                name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of shops" value="{{state.shopName}}">
+                    {{state.shopName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <fieldset class="form-group">
+            <label>City Name</label>
+            <input type="text" #cityName="ngModel" [(ngModel)]="stockPosition.cityName" class="form-control"
+                name="cityName" placeholder="City Name">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Group Name</label>
+            <input type="text" #groupName="ngModel" [(ngModel)]="stockPosition.groupName" class="form-control"
+                name="groupName" placeholder="Group Name">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>District</label>
+            <input type="text" #district="ngModel" [(ngModel)]="stockPosition.district" class="form-control"
+                name="district" placeholder="District Name">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Type(B/E/D/A)</label>
+            <select name="select" #type="ngModel" [(ngModel)]="stockPosition.type" class="form-control" name="type">
+                <option value="" disabled selected>Select Brand Type</option>
+                <option value='B'>B</option>
+                <option value='E'>E</option>
+                <option value='D'>D</option>
+                <option value='A'>A</option>
+                <!-- <option *ngFor="let brand of  brandList" [value]="entry.brandType"> {{brand}}</option> -->
+            </select>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Bottle/Case(B/C)</label>
+            <select name="select" #bottleCase="ngModel" [(ngModel)]="stockPosition.bottleCase" class="form-control"
+                name="bottleCase">
+                <option value="" disabled>Select Type</option>
+                <option value='B'>B</option>
+                <option value='C'>C</option>
+                <!-- <option *ngFor="let brand of  brandList" [value]="entry.brandType"> {{brand}}</option> -->
+            </select>
+        </fieldset>
+        <button type="submit" class="btn btn-success">Get Stock</button>
+    </form>
+</div>
