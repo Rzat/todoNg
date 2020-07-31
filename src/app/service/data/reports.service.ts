@@ -16,8 +16,8 @@ export class ReportsService {
 
   }
 
-  getStockPositionByShopName(username, shopName, type, packagingType) {
-    return this.httpClient.get(`${API_URL}/users/${username}/getStockPositionByCityName/${shopName}/${type}/${packagingType}`);
+  getStockPositionByShopName(username, shopName, type, packagingType, date) {
+    return this.httpClient.get(`${API_URL}/users/${username}/getStockPositionByShopName/${shopName}/${type}/${packagingType}?localDate=${date}`);
   }
 
   getStockPositionByCityName(username, cityName, type, packagingType) {

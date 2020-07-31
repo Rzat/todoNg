@@ -30,6 +30,7 @@ import { IssueStockComponent } from './issue-stock/issue-stock.component';
 import { DailySaleComponent } from './daily-sale/daily-sale.component';
 import { ReportsComponent } from './reports/reports.component';
 import { StockPositionComponent } from './stock-position/stock-position.component';
+import { StockReportComponent } from './stock-report/stock-report.component';
 
 
 
@@ -57,7 +58,8 @@ import { StockPositionComponent } from './stock-position/stock-position.componen
     IssueStockComponent,
     DailySaleComponent,
     ReportsComponent,
-    StockPositionComponent
+    StockPositionComponent,
+    StockReportComponent
   ],
   imports: [
     BrowserModule,

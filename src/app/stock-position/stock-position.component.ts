@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AddingParchaService } from '../adding-parcha.service';
 import { ReportsService } from '../service/data/reports.service';
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 export class StockPosition {
   constructor(
@@ -29,7 +31,8 @@ export class StockPositionComponent implements OnInit {
   stockPosition: StockPosition;
 
   constructor(private addingParchaService: AddingParchaService,
-    private reportService: ReportsService) { }
+    private reportService: ReportsService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.stockPosition = new StockPosition(new Date(), '', '', '', '', '', '');
@@ -64,13 +67,16 @@ export class StockPositionComponent implements OnInit {
       }
     )
   }
+
   save() {
     console.log('inside save' + JSON.stringify(this.stockPosition))
-    this.reportService.getStockPositionByCityName('rajat', 'Hisar', 'E', 'Case').subscribe(
-      response => {
-        console.log('response is :: ' + response)
-      }
-    )
+    this.reportService.getStockPositionByShopName('rajat', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase
+      , this.stockPosition.dateupto).subscribe(
+        response => {
+          console.log('response is :: ' + response)
+          this.router.navigate(['stockReport']);
+        }
+      )
   }
-
 }
+

@@ -1,0 +1,38 @@
+<h1>Stock Report</h1>
+<div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Shop Name</th>
+
+                <th> Date </th>
+
+                <th> Quarts </th>
+
+                <th> Pints </th>
+
+                <th> Nips </th>
+
+                <th> Beer </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todo of todos">
+                <td>{{todo.description}}</td>
+                <td> {{todo.targetDate | date}} </td>
+                <td> {{todo.done}} </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total</td>
+                <td>{{getTotalQuarts()}}</td>
+                <td>{{getTotalPints()}}</td>
+                <td>{{getTotalNips()}}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>

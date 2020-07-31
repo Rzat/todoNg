@@ -18,4 +18,8 @@ export class DailySaleService {
   findRateByShopNameAndBrandName(username, shopName, brandName) {
     return this.httpClient.get<AddingParcha>(`${API_URL}/users/${username}/findShopName/${shopName}/findBeerName/${brandName}`);
   }
+
+  saveDailySale(username, dailySale) {
+    return this.httpClient.post(`${API_URL}/users/${username}/saveDailySale`, dailySale)
+  }
 }

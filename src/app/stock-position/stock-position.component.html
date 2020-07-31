@@ -6,13 +6,12 @@
         <fieldset class="form-group">
             <label>Date upto</label>
             <input type="date" #dateupto="ngModel" [ngModel]="stockPosition.dateupto | date:'yyyy-MM-dd' "
-                (ngModelChange)="stockPosition.dateupto" class="form-control" name="dateupto">
+                (ngModelChange)="stockPosition.dateupto=$event" class="form-control" name="dateupto">
         </fieldset>
 
         <mat-form-field class="example-full-width">
             <mat-label>Select Shop</mat-label>
-            <mat-select #selectShop="ngModel" [(ngModel)]="stockPosition.selectShop" class="form-control"
-                name="selectShop">
+            <mat-select #selectShop="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
                 <mat-option>None</mat-option>
                 <mat-option *ngFor="let state of shops" value="{{state.shopName}}">
                     {{state.shopName}}</mat-option>

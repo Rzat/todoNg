@@ -366,14 +366,6 @@ export class DailySaleComponent implements OnInit {
 
 
 
-  addToCart() {
-    console.log('@@@' + JSON.stringify(this.items));
-    console.log('final K.V' + this.map.get(4));
-    console.log('final K.V' + this.map.get(2));
-    console.log('final K.V' + this.map.get(3));
-  }
-
-
   //get total opening 
   getTotalOpeningQuarts() {
     return this.items.map(t => t.openingQuarts).reduce((acc, value) => acc + value, 0);
@@ -488,6 +480,17 @@ export class DailySaleComponent implements OnInit {
   totalCLBIMFL() {
     this.totalCLBIMFLValue = this.clSale + this.bSale + this.imflSale;
     return this.totalCLBIMFLValue;
+  }
+
+
+
+  addToCart() {
+    console.log('@@@' + JSON.stringify(this.items));
+    this.dailySaleService.saveDailySale('rajat', this.items).subscribe(
+      response => {
+        console.log('response is' + response);
+      }
+    )
   }
 
 

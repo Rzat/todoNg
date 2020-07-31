@@ -20,6 +20,7 @@ import { IssueStockComponent } from './issue-stock/issue-stock.component';
 import { DailySaleComponent } from './daily-sale/daily-sale.component';
 import { ReportsComponent } from './reports/reports.component';
 import { StockPositionComponent } from './stock-position/stock-position.component';
+import { StockReportComponent } from './stock-report/stock-report.component';
 
 IssueStockComponent
 
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'issueStock', component: IssueStockComponent, canActivate: [RouteGuardService] },
   { path: 'dailySale', component: DailySaleComponent, canActivate: [RouteGuardService] },
   { path: 'reports', component: ReportsComponent, canActivate: [RouteGuardService] },
+  { path: 'stockReport', component: StockReportComponent, canActivate: [RouteGuardService] },
   { path: 'stockPosition', component: StockPositionComponent, canActivate: [RouteGuardService] },
   { path: 'formGroup', component: FormGroupExampleComponent, canActivate: [RouteGuardService] },
   { path: 'test', component: TestComponent, canActivate: [RouteGuardService] },
