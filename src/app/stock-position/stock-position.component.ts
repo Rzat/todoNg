@@ -69,14 +69,7 @@ export class StockPositionComponent implements OnInit {
   }
 
   save() {
-    console.log('inside save' + JSON.stringify(this.stockPosition))
-    this.reportService.getStockPositionByShopName('rajat', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase
-      , this.stockPosition.dateupto).subscribe(
-        response => {
-          console.log('response is :: ' + response)
-          this.router.navigate(['stockReport']);
-        }
-      )
+    this.router.navigate(['stockReport', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
   }
 }
 
