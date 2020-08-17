@@ -1,7 +1,8 @@
 <H1>Stock Position</H1>
 
 <div class="container">
-    <form (ngSubmit)="save()">
+    <!-- <form (ngSubmit)="save()"> -->
+    <form>
         <!-- Property binding and evnt binding -->
         <fieldset class="form-group">
             <label>Date upto</label>
@@ -18,23 +19,39 @@
             </mat-select>
         </mat-form-field>
 
-        <fieldset class="form-group">
-            <label>City Name</label>
-            <input type="text" #cityName="ngModel" [(ngModel)]="stockPosition.cityName" class="form-control"
-                name="cityName" placeholder="City Name">
-        </fieldset>
+        <mat-form-field class="example-full-width">
+            <mat-label>Select City</mat-label>
+            <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of city" value="{{state.city}}">
+                    {{state.city}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-        <fieldset class="form-group">
-            <label>Group Name</label>
-            <input type="text" #groupName="ngModel" [(ngModel)]="stockPosition.groupName" class="form-control"
-                name="groupName" placeholder="Group Name">
-        </fieldset>
+        <mat-form-field class="example-full-width">
+            <mat-label>Select Group Name</mat-label>
+            <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of city" value="{{state.groupS}}">
+                    {{state.groupS}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-        <fieldset class="form-group">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Select District</mat-label>
+            <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of city" value="{{state.district}}" (click)="districtButton()">
+                    {{state.district}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- <fieldset class="form-group">
             <label>District</label>
             <input type="text" #district="ngModel" [(ngModel)]="stockPosition.district" class="form-control"
                 name="district" placeholder="District Name">
-        </fieldset>
+        </fieldset> -->
 
         <fieldset class="form-group">
             <label>Type(B/E/D/A)</label>
@@ -58,6 +75,15 @@
                 <!-- <option *ngFor="let brand of  brandList" [value]="entry.brandType"> {{brand}}</option> -->
             </select>
         </fieldset>
-        <button type="submit" class="btn btn-success">Get Stock</button>
+        <!-- <button *ngIf="div2" type="submit" class="btn btn-success">Get Stock</button> -->
+        <button *ngIf="div2" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
+            Shop</button>
+        <button *ngIf="div2" (click)="getByCity()" type="submit" class="btn btn-success">Get Stock by
+            City</button>
+        <button *ngIf="div3" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
+            Group Name</button>
+        <button *ngIf="div1" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
+            District</button>
     </form>
+
 </div>

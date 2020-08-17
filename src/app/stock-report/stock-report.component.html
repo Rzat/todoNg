@@ -1,4 +1,4 @@
-<h1>Stock Report of {{select}}</h1>
+<h1>Stock Report of {{select}} for {{date | date}}</h1>
 <div class="container">
 
     <table class="table">
@@ -6,13 +6,11 @@
             <tr>
                 <th>Brand Name</th>
 
-                <th> Date </th>
+                <th> Quarts ({{packagingType}}) </th>
 
-                <th> Quarts </th>
+                <th> Pints ({{packagingType}})</th>
 
-                <th> Pints </th>
-
-                <th> Nips </th>
+                <th> Nips ({{packagingType}})</th>
 
 
             </tr>
@@ -20,7 +18,6 @@
         <tbody>
             <tr *ngFor="let stockReport of stockReports">
                 <td>{{stockReport.brandName}}</td>
-                <td> {{stockReport.date | date}} </td>
                 <td> {{stockReport.closingQuarts}} </td>
                 <td> {{stockReport.closingPints}} </td>
                 <td> {{stockReport.closingNips}} </td>
@@ -29,7 +26,6 @@
         <tfoot>
             <tr>
                 <td>Total</td>
-                <td></td>
                 <td>{{getTotalQuarts()}}</td>
                 <td>{{getTotalPints()}}</td>
                 <td>{{getTotalNips()}}</td>

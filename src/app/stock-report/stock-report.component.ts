@@ -28,11 +28,8 @@ export class StockReportComponent implements OnInit {
   }
 
   getStockReport(select, type, packagingType, date) {
-    console.log('new values are:: ' + select, type, packagingType, date);
-
     this.reportService.getStockPositionByShopName('rajat', select, type, packagingType, date).subscribe(
       response => {
-        console.log('response is :: ' + JSON.stringify(response))
         this.stockReports = response;
       }
     )
