@@ -31,7 +31,10 @@ export class StockPositionComponent implements OnInit {
   city = [];
   newArr = [];
   stockPosition: StockPosition;
-  div1: boolean = false;
+  districtEnabled: boolean = false;
+  shopEnabled: boolean = false;
+  cityEnabled: boolean = false;
+  groupEnabled: boolean = false;
 
   constructor(private addingParchaService: AddingParchaService,
     private reportService: ReportsService,
@@ -75,16 +78,53 @@ export class StockPositionComponent implements OnInit {
     // console.log("selected Group Name is::" + this.stockPosition.selectShop);
   }
 
-  districtButton() {
-    console.log('selected district');
-    this.div1 = true;
+  districtEnableButton() {
+    console.log('selected districtEnabled');
+    this.districtEnabled = true;
+    this.cityEnabled = false;
+    this.shopEnabled = false;
+    this.groupEnabled = false;
   }
+
+  cityEnableButton() {
+    console.log('selected cityEnableButton');
+    this.cityEnabled = true;
+    this.districtEnabled = false;
+    this.shopEnabled = false;
+    this.groupEnabled = false;
+  }
+
+  shopEnableButton() {
+    console.log('selected shopEnableButton');
+    this.shopEnabled = true;
+    this.districtEnabled = false;
+    this.cityEnabled = false;
+    this.groupEnabled = false;
+  }
+
+  groupEnableButton() {
+    console.log('selected groupEnableButton');
+    this.groupEnabled = true;
+    this.districtEnabled = false;
+    this.cityEnabled = false;
+    this.shopEnabled = false;
+  }
+
   getByDistrict() {
     console.log('inside district button, selected distrit is:: ' + this.stockPosition.selectShop);
   }
 
   getByCity() {
-    console.log('inside district button, selected City is:: ' + this.stockPosition.selectShop);
+    console.log('inside city button, selected City is:: ' + this.stockPosition.selectShop);
+  }
+
+  getByShop() {
+    console.log('inside shop button, selected shop is:: ' + this.stockPosition.selectShop);
+    this.router.navigate(['stockReport', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
+  }
+
+  getByGroup() {
+    console.log('inside group button, selected Group is:: ' + this.stockPosition.selectShop);
   }
 }
 

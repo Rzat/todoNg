@@ -14,7 +14,7 @@
             <mat-label>Select Shop</mat-label>
             <mat-select #selectShop="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of shops" value="{{state.shopName}}">
+                <mat-option *ngFor="let state of shops" value="{{state.shopName}}" (click)="shopEnableButton()">
                     {{state.shopName}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -23,7 +23,7 @@
             <mat-label>Select City</mat-label>
             <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of city" value="{{state.city}}">
+                <mat-option *ngFor="let state of city" value="{{state.city}}" (click)="cityEnableButton()">
                     {{state.city}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -32,7 +32,7 @@
             <mat-label>Select Group Name</mat-label>
             <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of city" value="{{state.groupS}}">
+                <mat-option *ngFor="let state of city" value="{{state.groupS}}" (click)="groupEnableButton()">
                     {{state.groupS}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -42,16 +42,10 @@
             <mat-label>Select District</mat-label>
             <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of city" value="{{state.district}}" (click)="districtButton()">
+                <mat-option *ngFor="let state of city" value="{{state.district}}" (click)="districtEnableButton()">
                     {{state.district}}</mat-option>
             </mat-select>
         </mat-form-field>
-
-        <!-- <fieldset class="form-group">
-            <label>District</label>
-            <input type="text" #district="ngModel" [(ngModel)]="stockPosition.district" class="form-control"
-                name="district" placeholder="District Name">
-        </fieldset> -->
 
         <fieldset class="form-group">
             <label>Type(B/E/D/A)</label>
@@ -76,13 +70,13 @@
             </select>
         </fieldset>
         <!-- <button *ngIf="div2" type="submit" class="btn btn-success">Get Stock</button> -->
-        <button *ngIf="div2" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
+        <button *ngIf="shopEnabled" (click)="getByShop()" type="submit" class="btn btn-success">Get Stock by
             Shop</button>
-        <button *ngIf="div2" (click)="getByCity()" type="submit" class="btn btn-success">Get Stock by
+        <button *ngIf="cityEnabled" (click)="getByCity()" type="submit" class="btn btn-success">Get Stock by
             City</button>
-        <button *ngIf="div3" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
+        <button *ngIf="groupEnabled" (click)="getByGroup()" type="submit" class="btn btn-success">Get Stock by
             Group Name</button>
-        <button *ngIf="div1" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
+        <button *ngIf="districtEnabled" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
             District</button>
     </form>
 
