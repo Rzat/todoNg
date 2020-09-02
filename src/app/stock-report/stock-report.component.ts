@@ -15,16 +15,27 @@ export class StockReportComponent implements OnInit {
   type = '';
   packagingType = '';
   date = '';
+  by = '';
 
   constructor(private route: ActivatedRoute,
     private reportService: ReportsService) { }
 
   ngOnInit(): void {
+
+    this.by = this.route.snapshot.params['byCity'];
     this.select = this.route.snapshot.params['select'];
     this.type = this.route.snapshot.params['type']
     this.packagingType = this.route.snapshot.params['packagingType']
     this.date = this.route.snapshot.params['date']
-    this.getStockReport(this.select, this.type, this.packagingType, this.date)
+
+    if (this.by === 'byCity') {
+      this.getStockReportByCity(this.select, this.type, this.packagingType, this.date)
+    } else if (this.by === 'byShop') {
+      console.log('inside shop' + this.by)
+      this.getStockReport(this.select, this.type, this.packagingType, this.date)
+    }
+
+
   }
 
   getStockReport(select, type, packagingType, date) {
@@ -33,7 +44,14 @@ export class StockReportComponent implements OnInit {
         this.stockReports = response;
       }
     )
+  }
 
+  getStockReportByCity(select, type, packagingType, date) {
+    this.reportService.getStockPositionByCityName('rajat', select, type, packagingType, date).subscribe(
+      response => {
+        this.stockReports = response;
+      }
+    )
   }
 
   getTotalQuarts() {

@@ -13,7 +13,7 @@ export class StockPosition {
     public groupName: string,
     public district: string,
     public type: string,
-    public bottleCase: string,
+    public bottleCase: string
 
   ) {
 
@@ -35,6 +35,7 @@ export class StockPositionComponent implements OnInit {
   shopEnabled: boolean = false;
   cityEnabled: boolean = false;
   groupEnabled: boolean = false;
+
 
   constructor(private addingParchaService: AddingParchaService,
     private reportService: ReportsService,
@@ -116,15 +117,18 @@ export class StockPositionComponent implements OnInit {
 
   getByCity() {
     console.log('inside city button, selected City is:: ' + this.stockPosition.selectShop);
-  }
 
+    //var byCity = byCity;
+    this.router.navigate(['stockReport', 'byCity', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
+  }
   getByShop() {
-    console.log('inside shop button, selected shop is:: ' + this.stockPosition.selectShop);
-    this.router.navigate(['stockReport', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
+    console.log('inside shop button, selected shop is:: ');
+    this.router.navigate(['stockReport', 'byShop', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
   }
 
   getByGroup() {
     console.log('inside group button, selected Group is:: ' + this.stockPosition.selectShop);
+    this.router.navigate(['stockReport', 'abc', 'def', 'ghi', 'jkl', 'mno']);
   }
 }
 

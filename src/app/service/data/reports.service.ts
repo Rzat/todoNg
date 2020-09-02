@@ -20,12 +20,12 @@ export class ReportsService {
     return this.httpClient.get<[]>(`${API_URL}/users/${username}/getStockPositionByShopName/${shopName}/${type}/${packagingType}?localDate=${date}`);
   }
 
-  getStockPositionByCityName(username, cityName, type, packagingType) {
-    return this.httpClient.get(`${API_URL}/users/${username}/getStockPositionByCityName/${cityName}/${type}/${packagingType}`);
+  getStockPositionByCityName(username, city, type, packagingType, date) {
+    return this.httpClient.get<[]>(`${API_URL}/users/${username}/getStockPositionByCityName/${city}/${type}/${packagingType}?localDate=${date}`);
   }
 
 
   getStockPositionByGroupName(username, groupName, type, packagingType) {
-    return this.httpClient.get(`${API_URL}/users/${username}/getStockPositionByCityName/${groupName}/${type}/${packagingType}`);
+    return this.httpClient.get<[]>(`${API_URL}/users/${username}/getStockPositionByCityName/${groupName}/${type}/${packagingType}`);
   }
 }

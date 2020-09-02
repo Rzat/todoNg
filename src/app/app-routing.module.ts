@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'issueStock', component: IssueStockComponent, canActivate: [RouteGuardService] },
   { path: 'dailySale', component: DailySaleComponent, canActivate: [RouteGuardService] },
   { path: 'reports', component: ReportsComponent, canActivate: [RouteGuardService] },
-  { path: 'stockReport/:select/:type/:packagingType/:date', component: StockReportComponent, canActivate: [RouteGuardService] },
+  { path: 'stockReport/:byCity/:select/:type/:packagingType/:date', component: StockReportComponent, canActivate: [RouteGuardService] },
   { path: 'stockPosition', component: StockPositionComponent, canActivate: [RouteGuardService] },
   { path: 'formGroup', component: FormGroupExampleComponent, canActivate: [RouteGuardService] },
   { path: 'test', component: TestComponent, canActivate: [RouteGuardService] },

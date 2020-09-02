@@ -70,7 +70,8 @@
             </select>
         </fieldset>
         <!-- <button *ngIf="div2" type="submit" class="btn btn-success">Get Stock</button> -->
-        <button *ngIf="shopEnabled" (click)="getByShop()" type="submit" class="btn btn-success">Get Stock by
+        <button *ngIf="shopEnabled" type="button" (click)="getByShop()" type="submit" class="btn btn-success">Get Stock
+            by
             Shop</button>
         <button *ngIf="cityEnabled" (click)="getByCity()" type="submit" class="btn btn-success">Get Stock by
             City</button>
