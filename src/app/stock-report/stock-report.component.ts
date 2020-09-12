@@ -31,12 +31,22 @@ export class StockReportComponent implements OnInit {
     if (this.by === 'byCity') {
       this.getStockReportByCity(this.select, this.type, this.packagingType, this.date)
     } else if (this.by === 'byShop') {
-      console.log('inside shop' + this.by)
       this.getStockReport(this.select, this.type, this.packagingType, this.date)
+    } else if (this.by === 'byDistrict') {
+      this.getStockReportByDistrict(this.select, this.type, this.packagingType, this.date)
     }
 
 
   }
+
+  getStockReportByDistrict(select, type, packagingType, date) {
+    this.reportService.getStockPositionByDistrictName('rajat', select, type, packagingType, date).subscribe(
+      response => {
+        this.stockReports = response;
+      }
+    )
+  }
+
 
   getStockReport(select, type, packagingType, date) {
     this.reportService.getStockPositionByShopName('rajat', select, type, packagingType, date).subscribe(

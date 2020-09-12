@@ -112,7 +112,7 @@ export class StockPositionComponent implements OnInit {
   }
 
   getByDistrict() {
-    console.log('inside district button, selected distrit is:: ' + this.stockPosition.selectShop);
+    this.router.navigate(['stockReport', 'byDistrict', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
   }
 
   getByCity() {
