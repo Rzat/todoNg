@@ -1,36 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { AddingParchaService } from '../adding-parcha.service';
-import { ReportsService } from '../service/data/reports.service';
-import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import { AddingParchaService } from '../adding-parcha.service';
 import { MasterShopEntryService } from '../service/data/master-shop-entry.service';
+import { ReportsService } from '../service/data/reports.service';
+import { StockPosition } from '../stock-position/stock-position.component';
 
-export class StockPosition {
-  constructor(
-    public dateupto: Date,
-    public selectShop: string,
-    public cityName: string,
-    public groupName: string,
-    public district: string,
-    public type: string,
-    public bottleCase: string
 
-  ) {
 
-  }
-}
 
 @Component({
-  selector: 'app-stock-position',
-  templateUrl: './stock-position.component.html',
-  styleUrls: ['./stock-position.component.css']
+  selector: 'app-purchase-report',
+  templateUrl: './purchase-report.component.html',
+  styleUrls: ['./purchase-report.component.css']
 })
-export class StockPositionComponent implements OnInit {
+export class PurchaseReportComponent implements OnInit {
 
   shops = [];
   city = [];
   newArr = [];
   stockPosition: StockPosition;
+  dateTo: Date;
   districtEnabled: boolean = false;
   shopEnabled: boolean = false;
   cityEnabled: boolean = false;
@@ -39,8 +28,7 @@ export class StockPositionComponent implements OnInit {
 
   constructor(private addingParchaService: AddingParchaService,
     private reportService: ReportsService,
-    private masterBrandService: MasterShopEntryService,
-    private router: Router) { }
+    private masterBrandService: MasterShopEntryService, private router: Router) { }
 
   ngOnInit(): void {
     this.stockPosition = new StockPosition(new Date(), '', '', '', '', '', '');
@@ -62,21 +50,6 @@ export class StockPositionComponent implements OnInit {
         this.city = this.newArr;
       }
     )
-  }
-
-
-  save2() {
-    console.log('inside save' + JSON.stringify(this.stockPosition))
-    this.reportService.getStockPosition('rajat', this.stockPosition).subscribe(
-      response => {
-        console.log('response is :: ' + response)
-      }
-    )
-  }
-
-  save() {
-    this.router.navigate(['stockReport', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
-    // console.log("selected Group Name is::" + this.stockPosition.selectShop);
   }
 
   districtEnableButton() {
@@ -115,11 +88,12 @@ export class StockPositionComponent implements OnInit {
     this.router.navigate(['stockReport', 'byCity', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
   }
   getByShop() {
-    this.router.navigate(['stockReport', 'byShop', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
+    console.log('date from::' + this.stockPosition.dateupto + 'date to::' + this.dateTo);
+    //this.router.navigate(['stockReport', 'byShop', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
   }
 
   getByGroup() {
     this.router.navigate(['stockReport', 'abc', 'def', 'ghi', 'jkl', 'mno']);
   }
-}
 
+}

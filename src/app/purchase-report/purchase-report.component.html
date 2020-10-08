@@ -1,0 +1,82 @@
+<H1>Purchase Report</H1>
+
+<div class="container">
+
+    <form>
+
+        <fieldset class="form-group">
+            <label>Date From</label>
+            <input type="date" #dateupto="ngModel" [ngModel]="stockPosition.dateupto | date:'yyyy-MM-dd' "
+                (ngModelChange)="stockPosition.dateupto=$event" class="form-control" name="dateupto">
+        </fieldset>
+
+        <fieldset>
+            <label>Date To</label>
+            <input type="date" #dateupto="ngModel" [ngModel]="dateTo | date:'yyyy-MM-dd' "
+                (ngModelChange)="dateTo=$event" class="form-control" name="dateTo">
+        </fieldset>
+
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Select Shop</mat-label>
+            <mat-select #selectShop="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of shops" value="{{state.shopName}}" (click)="shopEnableButton()">
+                    {{state.shopName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Select City</mat-label>
+            <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of city" value="{{state.city}}" (click)="cityEnableButton()">
+                    {{state.city}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Select Group Name</mat-label>
+            <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of city" value="{{state.groupS}}" (click)="groupEnableButton()">
+                    {{state.groupS}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Select District</mat-label>
+            <mat-select #cityName="ngModel" [(ngModel)]="stockPosition.selectShop" name="selectShop">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let state of city" value="{{state.district}}" (click)="districtEnableButton()">
+                    {{state.district}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <fieldset class="form-group">
+            <label>Type(B/E/D/A)</label>
+            <select name="select" #type="ngModel" [(ngModel)]="stockPosition.type" class="form-control" name="type">
+                <option value="" disabled selected>Select Brand Type</option>
+                <option value='B'>B</option>
+                <option value='E'>E</option>
+                <option value='D'>D</option>
+                <option value='A'>A</option>
+            </select>
+        </fieldset>
+        <fieldset class="form-group">
+            <label>Bottle/Case(B/C)</label>
+            <select name="select" #bottleCase="ngModel" [(ngModel)]="stockPosition.bottleCase" class="form-control"
+                name="bottleCase">
+                <option value="" disabled>Select Type</option>
+                <option value='B'>B</option>
+                <option value='C'>C</option>
+            </select>
+        </fieldset>
+        <button *ngIf="shopEnabled" type="button" (click)="getByShop()" type="submit" class="btn btn-success">Get Stock
+            by
+            Shop</button>
+        <button *ngIf="cityEnabled" (click)="getByCity()" type="submit" class="btn btn-success">Get Stock by
+            City</button>
+        <button *ngIf="groupEnabled" (click)="getByGroup()" type="submit" class="btn btn-success">Get Stock by
+            Group Name</button>
+        <button *ngIf="districtEnabled" (click)="getByDistrict()" type="submit" class="btn btn-success">Get Stock by
+            District</button>
+    </form>
+
+</div>

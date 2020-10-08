@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.basicAuth.executeBasicJWTAuthenticateService(this.username, this.password)
       .subscribe(
         data => {
-          console.log(data)
+          console.log('loggedin')
           //Redirect to welcome page
           this.router.navigate(['welcome', this.username])
           this.invalidLogin = false
