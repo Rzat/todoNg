@@ -6,14 +6,14 @@
 
         <fieldset class="form-group">
             <label>Date From</label>
-            <input type="date" #dateupto="ngModel" [ngModel]="stockPosition.dateupto | date:'yyyy-MM-dd' "
-                (ngModelChange)="stockPosition.dateupto=$event" class="form-control" name="dateupto">
+            <input type="date" #dateFrom="ngModel" [ngModel]="stockPosition.dateFrom | date:'yyyy-MM-dd' "
+                (ngModelChange)="stockPosition.dateFrom=$event" class="form-control" name="dateFrom">
         </fieldset>
 
         <fieldset>
             <label>Date To</label>
-            <input type="date" #dateupto="ngModel" [ngModel]="dateTo | date:'yyyy-MM-dd' "
-                (ngModelChange)="dateTo=$event" class="form-control" name="dateTo">
+            <input type="date" #dateTo="ngModel" [ngModel]="stockPosition.dateTo | date:'yyyy-MM-dd' "
+                (ngModelChange)="stockPosition.dateTo=$event" class="form-control" name="dateTo">
         </fieldset>
 
 

@@ -6,6 +6,21 @@ import { ReportsService } from '../service/data/reports.service';
 import { StockPosition } from '../stock-position/stock-position.component';
 
 
+export class PurchaseReport {
+  constructor(
+    public dateTo: Date,
+    public dateFrom: Date,
+    public selectShop: string,
+    public cityName: string,
+    public groupName: string,
+    public district: string,
+    public type: string,
+    public bottleCase: string
+
+  ) {
+
+  }
+}
 
 
 @Component({
@@ -18,8 +33,7 @@ export class PurchaseReportComponent implements OnInit {
   shops = [];
   city = [];
   newArr = [];
-  stockPosition: StockPosition;
-  dateTo: Date;
+  stockPosition: PurchaseReport;
   districtEnabled: boolean = false;
   shopEnabled: boolean = false;
   cityEnabled: boolean = false;
@@ -31,7 +45,7 @@ export class PurchaseReportComponent implements OnInit {
     private masterBrandService: MasterShopEntryService, private router: Router) { }
 
   ngOnInit(): void {
-    this.stockPosition = new StockPosition(new Date(), '', '', '', '', '', '');
+    this.stockPosition = new PurchaseReport(new Date(), new Date(), '', '', '', '', '', '');
     this.retrieveShopNames();
   }
 
@@ -81,15 +95,15 @@ export class PurchaseReportComponent implements OnInit {
   }
 
   getByDistrict() {
-    this.router.navigate(['stockReport', 'byDistrict', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
+    this.router.navigate(['viewPurchase', 'byDistrict', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateFrom, this.stockPosition.dateTo]);
   }
 
   getByCity() {
-    this.router.navigate(['stockReport', 'byCity', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
+    this.router.navigate(['viewPurchase', 'byCity', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateFrom, this.stockPosition.dateTo]);
   }
   getByShop() {
-    console.log('date from::' + this.stockPosition.dateupto + 'date to::' + this.dateTo);
-    //this.router.navigate(['stockReport', 'byShop', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateupto]);
+
+    this.router.navigate(['viewPurchase', 'byShop', this.stockPosition.selectShop, this.stockPosition.type, this.stockPosition.bottleCase, this.stockPosition.dateFrom, this.stockPosition.dateTo]);
   }
 
   getByGroup() {

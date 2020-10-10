@@ -22,6 +22,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { StockPositionComponent } from './stock-position/stock-position.component';
 import { StockReportComponent } from './stock-report/stock-report.component';
 import { PurchaseReportComponent } from './purchase-report/purchase-report.component';
+import { ViewPurchaseComponent } from './view-purchase/view-purchase.component';
 
 IssueStockComponent
 
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'dailySale', component: DailySaleComponent, canActivate: [RouteGuardService] },
   { path: 'reports', component: ReportsComponent, canActivate: [RouteGuardService] },
   { path: 'stockReport/:byCity/:select/:type/:packagingType/:date', component: StockReportComponent, canActivate: [RouteGuardService] },
+  { path: 'viewPurchase/:byCity/:select/:type/:packagingType/:dateFrom/:dateTo', component: ViewPurchaseComponent, canActivate: [RouteGuardService] },
   { path: 'stockPosition', component: StockPositionComponent, canActivate: [RouteGuardService] },
   { path: 'purchaseReportComponent', component: PurchaseReportComponent, canActivate: [RouteGuardService] },
   { path: 'formGroup', component: FormGroupExampleComponent, canActivate: [RouteGuardService] },

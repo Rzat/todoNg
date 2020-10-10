@@ -32,6 +32,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { StockPositionComponent } from './stock-position/stock-position.component';
 import { StockReportComponent } from './stock-report/stock-report.component';
 import { PurchaseReportComponent } from './purchase-report/purchase-report.component';
+import { ViewPurchaseComponent } from './view-purchase/view-purchase.component';
 
 
 
@@ -61,7 +62,8 @@ import { PurchaseReportComponent } from './purchase-report/purchase-report.compo
     ReportsComponent,
     StockPositionComponent,
     StockReportComponent,
-    PurchaseReportComponent
+    PurchaseReportComponent,
+    ViewPurchaseComponent
   ],
   imports: [
     BrowserModule,

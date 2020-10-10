@@ -1,0 +1,36 @@
+<h1>Stock Report of {{select}} from {{dateFrom}} to {{dateTo}} </h1>
+<div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Brand Name</th>
+
+                <th> Quarts ({{packagingType}}) </th>
+
+                <th> Pints ({{packagingType}})</th>
+
+                <th> Nips ({{packagingType}})</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let stockReport of stockReports">
+                <td>{{stockReport.brandName}}</td>
+                <td> {{stockReport.closingQuarts}} </td>
+                <td> {{stockReport.closingPints}} </td>
+                <td> {{stockReport.closingNips}} </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total</td>
+                <td>{{getTotalQuarts()}}</td>
+                <td>{{getTotalPints()}}</td>
+                <td>{{getTotalNips()}}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
